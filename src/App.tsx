@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PowerOnScreen from "./components/screens/PowerOnScreen";
+import Taskbar from "./components/taskbar/Taskbar";
 
 const App = () => {
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
@@ -28,6 +29,7 @@ const App = () => {
             draggable="false" // Disable dragging
             style={{ userSelect: "none" }} // Disable selection
           />
+          <Taskbar />
         </div>
       )}
     </main>

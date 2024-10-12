@@ -5,3 +5,7 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.taskbar-hover {
+  @apply hover:bg-[#272727] transition-colors duration-100;
+}
