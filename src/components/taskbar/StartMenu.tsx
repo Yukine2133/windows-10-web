@@ -13,11 +13,16 @@ const StartMenu = () => {
     exit: { opacity: 0, y: 30 },
   };
 
+  const labelVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  };
+
   return (
     <div className="relative">
       <div
         onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
-        className="hover:bg-[#272727] transition-colors duration-100 h-full group w-10 p-2"
+        className="hover:bg-[#272727] transition-colors duration-100 h-full w-10 p-2"
       >
         <FaWindows className="w-5 h-6 group-hover:text-[#d157e2]" />
       </div>
@@ -30,24 +35,36 @@ const StartMenu = () => {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="flex items-start gap-4 px-2 py-4 absolute bottom-full w-[40rem] h-[31.938em] bg-[#1f1f1f] shadow-lg"
         >
-          <div className="flex group group-hover:w-[100px] flex-col justify-between h-full">
-            <div className="group flex items-center gap-2">
+          <div className="flex flex-col justify-between h-full w-[150px]">
+            <div className="flex items-center gap-2">
               <HiBars3 className="size-6 cursor-pointer" />
-              <h3 className="hidden group-hover:block">Start</h3>
             </div>
-            <div className="space-y-4 group">
+            <div className="space-y-4">
               {menuItems.map((item, index) => {
                 const { Icon } = item;
                 return (
-                  <div key={index} className="flex items-center gap-2">
-                    <Icon className="size-6 cursor-pointer" />
-                    <h3 className="hidden group-hover:block">{item.label}</h3>
+                  <div
+                    key={index}
+                    className="flex cursor-pointer items-center gap-2 group hover:bg-[#333]  transition-colors duration-300 p-2 rounded-md"
+                    style={{ minWidth: "150px" }}
+                  >
+                    <Icon className="size-6" />
+                    <motion.h3
+                      className="opacity-0 group-hover:opacity-100"
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                      variants={labelVariants}
+                    >
+                      {item.label}
+                    </motion.h3>
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="">
+
+          <div className="flex-1 w-full">
             <div className="text-sm">Apps</div>
           </div>
         </motion.div>
