@@ -3,9 +3,12 @@ import { FaWindows } from "react-icons/fa";
 import { HiBars3 } from "react-icons/hi2";
 import { menuItems } from "../../utils/constants";
 import { motion } from "framer-motion";
+import Quit from "./Quit";
 
 const StartMenu = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
+
+  const [quit, setQuit] = useState(false);
 
   const menuVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -39,14 +42,19 @@ const StartMenu = () => {
             <div className="flex items-center gap-2">
               <HiBars3 className="size-6 cursor-pointer" />
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 relative">
               {menuItems.map((item, index) => {
-                const { Icon } = item;
+                const { Icon, label } = item;
                 return (
                   <div
                     key={index}
-                    className="flex cursor-pointer items-center gap-2 group hover:bg-[#333]  transition-colors duration-300 p-2 rounded-md"
+                    className="flex  cursor-pointer items-center gap-2 group hover:bg-[#333]  transition-colors duration-300 p-2 rounded-md"
                     style={{ minWidth: "150px" }}
+                    onClick={() => {
+                      if (label === "Power") {
+                        setQuit(!quit);
+                      }
+                    }}
                   >
                     <Icon className="size-6" />
                     <motion.h3
@@ -56,11 +64,12 @@ const StartMenu = () => {
                       exit="hidden"
                       variants={labelVariants}
                     >
-                      {item.label}
+                      {label}
                     </motion.h3>
                   </div>
                 );
               })}
+              {quit && <Quit />}
             </div>
           </div>
 

@@ -3,10 +3,19 @@ import PowerOnScreen from "./components/screens/PowerOnScreen";
 import Taskbar from "./components/taskbar/Taskbar";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { initiatePowerOnSequence } from "./redux/slices/appSlice";
+import SleepScreen from "./components/screens/SleepScreen";
+import RestartScreen from "./components/screens/RestartScreen";
+import ShutDownScreen from "./components/screens/ShutDownScreen";
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { showApp, showLoadingScreen } = useAppSelector((state) => state.app);
+  const {
+    showApp,
+    showLoadingScreen,
+    showSleepScreen,
+    showRestartScreen,
+    showShutDownScreen,
+  } = useAppSelector((state) => state.app);
 
   useEffect(() => {
     setTimeout(() => {
@@ -16,7 +25,9 @@ const App = () => {
   return (
     <main>
       {showLoadingScreen && <PowerOnScreen />}
-
+      {showSleepScreen && <SleepScreen />}
+      {showRestartScreen && <RestartScreen />}
+      {showShutDownScreen && <ShutDownScreen />}
       {showApp && (
         <div className="relative  w-[100vw] h-[100vh]">
           <img
@@ -24,6 +35,7 @@ const App = () => {
             src="default-wallpaper.webp"
             alt="Default Wallpaper"
             draggable="false"
+            onError={() => console.log("Error loading wallpaper")}
             style={{ userSelect: "none" }}
           />
           <Taskbar />
