@@ -6,6 +6,7 @@ import { initiatePowerOnSequence } from "./redux/slices/appSlice";
 import SleepScreen from "./components/screens/SleepScreen";
 import RestartScreen from "./components/screens/RestartScreen";
 import ShutDownScreen from "./components/screens/ShutDownScreen";
+import Apps from "./components/apps/Apps";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +39,7 @@ const App = () => {
             onError={() => console.log("Error loading wallpaper")}
             style={{ userSelect: "none" }}
           />
+          <Apps />
           <Taskbar />
         </div>
       )}
