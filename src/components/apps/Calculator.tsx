@@ -1,26 +1,27 @@
 import { motion } from "framer-motion";
 import { useAppDispatch } from "../../hooks/reduxHooks";
-
 import { HiMinus } from "react-icons/hi2";
 import { MdOutlineCropSquare } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import React, { useState } from "react";
 import { closeApp } from "../../redux/slices/appSlice";
 import { calculatorButtons } from "../../utils/constants";
+
 const Calculator = ({
   constraintRef,
 }: {
   constraintRef: React.MutableRefObject<null>;
 }) => {
   const dispatch = useAppDispatch();
-
   const [display, setDisplay] = useState("0");
+  const [history, setHistory] = useState("");
   const [currentValue, setCurrentValue] = useState<number | null>(null);
   const [operator, setOperator] = useState<string | null>(null);
   const [waitingForOperand, setWaitingForOperand] = useState(false);
 
   const clearDisplay = () => {
     setDisplay("0");
+    setHistory("");
     setCurrentValue(null);
     setOperator(null);
     setWaitingForOperand(false);
@@ -41,8 +42,10 @@ const Calculator = ({
         const result = calculate(currentValue, parseFloat(display), operator);
         if (result === "Error") {
           setDisplay("Error");
+          setHistory("");
         } else {
           setDisplay(String(result));
+          setHistory(`${history} ${display} =`);
           setCurrentValue(result);
         }
         setOperator(null);
@@ -55,12 +58,14 @@ const Calculator = ({
         const result = calculate(currentValue, parseFloat(display), operator);
         if (result === "Error") {
           setDisplay("Error");
+          setHistory("");
           setCurrentValue(null);
         } else {
           setDisplay(String(result));
           setCurrentValue(result);
         }
       }
+      setHistory(`${display} ${value}`);
       setOperator(value);
       setWaitingForOperand(true);
     }
@@ -84,6 +89,7 @@ const Calculator = ({
         return secondOperand;
     }
   };
+
   return (
     <motion.div
       drag
@@ -93,7 +99,7 @@ const Calculator = ({
     >
       <div className="flex justify-between items-center">
         <h3 className=" py-2 px-4">Calculator</h3>
-        <div className="flex  items-center">
+        <div className="flex items-center">
           <HiMinus className="size-10 hover:bg-[#363636] px-3 py-2" />
           <MdOutlineCropSquare className="size-10 hover:bg-[#363636] px-3 py-2" />
           <IoMdClose
@@ -103,7 +109,8 @@ const Calculator = ({
         </div>
       </div>
 
-      <div className="text-right p-4 text-3xl  text-white">{display}</div>
+      <div className="text-right px-4  text-gray-400">{history}</div>
+      <div className="text-right px-4 py-2 text-3xl text-white">{display}</div>
 
       <div className="grid grid-cols-4 gap-1 p-4">
         {calculatorButtons.flat().map((button) => (
