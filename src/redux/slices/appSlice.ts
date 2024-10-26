@@ -6,6 +6,7 @@ interface AppState {
   showShutDownScreen: boolean;
   showSleepScreen: boolean;
   showApp: boolean;
+  openedApps: string[];
 }
 
 const initialState: AppState = {
@@ -14,6 +15,7 @@ const initialState: AppState = {
   showSleepScreen: false,
   showShutDownScreen: false,
   showApp: false,
+  openedApps: [],
 };
 
 const appSlice = createSlice({
@@ -42,6 +44,16 @@ const appSlice = createSlice({
       state.showLoadingScreen = false;
       state.showApp = true;
     },
+    openApp: (state, action: PayloadAction<string>) => {
+      if (!state.openedApps.includes(action.payload)) {
+        state.openedApps.push(action.payload);
+      }
+    },
+    closeApp: (state, action: PayloadAction<string>) => {
+      state.openedApps = state.openedApps.filter(
+        (app) => app !== action.payload
+      );
+    },
   },
 });
 
@@ -52,5 +64,7 @@ export const {
   setShowRestartScreen,
   setShowSleepScreen,
   setShutDownScreen,
+  openApp,
+  closeApp,
 } = appSlice.actions;
 export default appSlice.reducer;

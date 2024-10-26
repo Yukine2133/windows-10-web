@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import PowerOnScreen from "./components/screens/PowerOnScreen";
 import Taskbar from "./components/taskbar/Taskbar";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
@@ -7,15 +7,18 @@ import SleepScreen from "./components/screens/SleepScreen";
 import RestartScreen from "./components/screens/RestartScreen";
 import ShutDownScreen from "./components/screens/ShutDownScreen";
 import Apps from "./components/apps/Apps";
+import Calculator from "./components/apps/Calculator";
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const constraintRef = useRef(null);
   const {
     showApp,
     showLoadingScreen,
     showSleepScreen,
     showRestartScreen,
     showShutDownScreen,
+    openedApps,
   } = useAppSelector((state) => state.app);
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const App = () => {
       {showRestartScreen && <RestartScreen />}
       {showShutDownScreen && <ShutDownScreen />}
       {showApp && (
-        <div className="relative  w-[100vw] h-[100vh]">
+        <div ref={constraintRef} className="relative  w-[100vw] h-[100vh]">
           <img
             className="h-full w-full absolute top-0 left-0 object-cover"
             src="default-wallpaper.webp"
@@ -40,6 +43,10 @@ const App = () => {
             style={{ userSelect: "none" }}
           />
           <Apps />
+          turn (
+          {openedApps.includes("Calculator") && (
+            <Calculator constraintRef={constraintRef} />
+          )}
           <Taskbar />
         </div>
       )}
