@@ -27,6 +27,12 @@ const Calculator = ({
     setWaitingForOperand(false);
   };
 
+  const deleteLastDigit = () => {
+    setDisplay((prevDisplay) =>
+      prevDisplay.length > 1 ? prevDisplay.slice(0, -1) : "0"
+    );
+  };
+
   const handleClick = (value: string) => {
     if (!isNaN(Number(value))) {
       if (waitingForOperand) {
@@ -37,6 +43,8 @@ const Calculator = ({
       }
     } else if (value === "C") {
       clearDisplay();
+    } else if (value === "⌫") {
+      deleteLastDigit();
     } else if (value === "=") {
       if (operator && currentValue !== null) {
         const result = calculate(currentValue, parseFloat(display), operator);
@@ -100,11 +108,11 @@ const Calculator = ({
       <div className="flex justify-between items-center">
         <h3 className=" py-2 px-4">Calculator</h3>
         <div className="flex items-center">
-          <HiMinus className="size-10 hover:bg-[#363636] px-3 py-2" />
-          <MdOutlineCropSquare className="size-10 hover:bg-[#363636] px-3 py-2" />
+          <HiMinus className="size-10 hover:bg-[#363636] px-3 py-2 transition-colors duration-200" />
+          <MdOutlineCropSquare className="size-10 hover:bg-[#363636] px-3 py-2 transition-colors duration-200" />
           <IoMdClose
             onClick={() => dispatch(closeApp("Calculator"))}
-            className="size-10 hover:bg-[#11e81123] px-3 py-2"
+            className="size-10 hover:bg-[#e81123] px-3 py-2 transition-colors duration-200"
           />
         </div>
       </div>
