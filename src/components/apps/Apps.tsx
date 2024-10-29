@@ -1,11 +1,18 @@
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { openApp } from "../../redux/slices/appSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { openApp, restoreApp } from "../../redux/slices/appSlice";
 
 const Apps = () => {
   const dispatch = useAppDispatch();
+  const { minimizedApps } = useAppSelector((state) => state.app);
+
   const toggleApp = (name: string) => {
-    dispatch(openApp(name));
+    if (minimizedApps.includes(name)) {
+      dispatch(restoreApp(name));
+    } else {
+      dispatch(openApp(name));
+    }
   };
+
   return (
     <div className="absolute text-white p-2">
       <div

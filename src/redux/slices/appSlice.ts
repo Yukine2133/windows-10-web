@@ -7,6 +7,7 @@ interface AppState {
   showSleepScreen: boolean;
   showApp: boolean;
   openedApps: string[];
+  minimizedApps: string[];
 }
 
 const initialState: AppState = {
@@ -16,8 +17,8 @@ const initialState: AppState = {
   showShutDownScreen: false,
   showApp: false,
   openedApps: [],
+  minimizedApps: [],
 };
-
 const appSlice = createSlice({
   name: "app",
   initialState,
@@ -54,6 +55,16 @@ const appSlice = createSlice({
         (app) => app !== action.payload
       );
     },
+    minimizeApp: (state, action: PayloadAction<string>) => {
+      if (!state.minimizedApps.includes(action.payload)) {
+        state.minimizedApps.push(action.payload);
+      }
+    },
+    restoreApp: (state, action: PayloadAction<string>) => {
+      state.minimizedApps = state.minimizedApps.filter(
+        (app) => app !== action.payload
+      );
+    },
   },
 });
 
@@ -66,5 +77,7 @@ export const {
   setShutDownScreen,
   openApp,
   closeApp,
+  minimizeApp,
+  restoreApp,
 } = appSlice.actions;
 export default appSlice.reducer;

@@ -19,6 +19,7 @@ const App = () => {
     showRestartScreen,
     showShutDownScreen,
     openedApps,
+    minimizedApps,
   } = useAppSelector((state) => state.app);
 
   useEffect(() => {
@@ -44,9 +45,10 @@ const App = () => {
           />
           <Apps />
           turn (
-          {openedApps.includes("Calculator") && (
-            <Calculator constraintRef={constraintRef} />
-          )}
+          {openedApps.includes("Calculator") &&
+            !minimizedApps.includes("Calculator") && (
+              <Calculator constraintRef={constraintRef} />
+            )}
           <Taskbar />
         </div>
       )}
