@@ -1,20 +1,19 @@
 import { motion } from "framer-motion";
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { HiMinus } from "react-icons/hi2";
-import { MdOutlineCropSquare } from "react-icons/md";
-import { IoMdClose } from "react-icons/io";
+
 import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
 import { calculatorButtons } from "../../utils/constants";
 import useCalculatorLogicHook from "../../hooks/useCalculatorLogicHook";
+import WindowControls from "../WindowControls";
+import { useAppDispatch } from "../../hooks/reduxHooks";
 
 const Calculator = ({
   constraintRef,
 }: {
   constraintRef: React.MutableRefObject<null>;
 }) => {
-  const dispatch = useAppDispatch();
-
   const { history, handleClick, display } = useCalculatorLogicHook();
+
+  const dispatch = useAppDispatch();
 
   return (
     <motion.div
@@ -28,17 +27,10 @@ const Calculator = ({
     >
       <div className="flex justify-between items-center">
         <h3 className=" py-2 px-4">Calculator</h3>
-        <div className="flex items-center">
-          <HiMinus
-            onClick={() => dispatch(minimizeApp("Calculator"))}
-            className="size-10 hover:bg-[#363636] px-3 py-2 transition-colors duration-200"
-          />
-          <MdOutlineCropSquare className="size-10 hover:bg-[#363636] px-3 py-2 transition-colors duration-200" />
-          <IoMdClose
-            onClick={() => dispatch(closeApp("Calculator"))}
-            className="size-10 hover:bg-[#e81123] px-3 py-2 transition-colors duration-200"
-          />
-        </div>
+        <WindowControls
+          minimizeApp={() => dispatch(minimizeApp("Calculator"))}
+          closeApp={() => dispatch(closeApp("Calculator"))}
+        />
       </div>
 
       <div className="text-right px-4  text-gray-400">{history}</div>
