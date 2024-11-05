@@ -8,6 +8,7 @@ import RestartScreen from "./components/screens/RestartScreen";
 import ShutDownScreen from "./components/screens/ShutDownScreen";
 import Apps from "./components/apps/Apps";
 import Calculator from "./components/apps/Calculator";
+import Settings from "./components/settings/Settings";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -44,11 +45,11 @@ const App = () => {
             style={{ userSelect: "none" }}
           />
           <Apps />
-          turn (
           {openedApps.includes("Calculator") &&
             !minimizedApps.includes("Calculator") && (
               <Calculator constraintRef={constraintRef} />
             )}
+          <Settings />
           <Taskbar />
         </div>
       )}
