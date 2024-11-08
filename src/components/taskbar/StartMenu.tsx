@@ -4,8 +4,31 @@ import { HiBars3 } from "react-icons/hi2";
 import { menuItems } from "../../utils/constants";
 import { motion } from "framer-motion";
 import Quit from "./Quit";
+import { openApp, restoreApp } from "../../redux/slices/appSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 
 const StartMenu = () => {
+  const dispatch = useAppDispatch();
+
+  const { minimizedApps } = useAppSelector((state) => state.app);
+
+  const handleClick = (label: string) => {
+    if (label === "Power") {
+      setQuit(!quit);
+    }
+    if (label === "Settings") {
+      toggleSettings("Settings");
+    }
+  };
+
+  const toggleSettings = (name: string) => {
+    setIsStartMenuOpen(false);
+    if (minimizedApps.includes(name)) {
+      dispatch(restoreApp(name));
+    } else {
+      dispatch(openApp(name));
+    }
+  };
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
 
   const [quit, setQuit] = useState(false);
@@ -50,11 +73,7 @@ const StartMenu = () => {
                     key={index}
                     className="flex  cursor-pointer items-center gap-2 group hover:bg-[#333]  transition-colors duration-300 p-2 rounded-md"
                     style={{ minWidth: "150px" }}
-                    onClick={() => {
-                      if (label === "Power") {
-                        setQuit(!quit);
-                      }
-                    }}
+                    onClick={() => handleClick(label)}
                   >
                     <Icon className="size-6" />
                     <motion.h3

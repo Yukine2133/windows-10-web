@@ -4,6 +4,7 @@ import DateTimeDisplay from "./DateTimeDisplay";
 import StartMenu from "./StartMenu";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { minimizeApp, restoreApp } from "../../redux/slices/appSlice";
+import { AiOutlineSetting } from "react-icons/ai";
 
 const Taskbar = () => {
   const dispatch = useAppDispatch();
@@ -31,6 +32,17 @@ const Taskbar = () => {
             } p-2`}
           >
             <img src="calculator.png" alt="Calculator" className="size-6" />
+          </div>
+        )}
+        {openedApps.includes("Settings") && (
+          <div
+            onClick={() => toggleApp("Settings")}
+            className={`${
+              !minimizedApps.includes("Settings") &&
+              "bg-[#272727] p-2 hover:bg-[#474747] transition-colors duration-200"
+            } p-2`}
+          >
+            <AiOutlineSetting className="size-6" />
           </div>
         )}
       </div>

@@ -1,12 +1,16 @@
 import { motion } from "framer-motion";
 import { settingItems } from "../../utils/constants";
 import WindowControls from "../WindowControls";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
 
 const Settings = ({
   constraintRef,
 }: {
   constraintRef: React.MutableRefObject<null>;
 }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -19,7 +23,14 @@ const Settings = ({
     >
       <div className="flex items-center  justify-between">
         <h3 className="px-4 text-sm">Settings</h3>
-        <WindowControls closeApp={() => {}} minimizeApp={() => {}} />
+        <WindowControls
+          closeApp={() => {
+            dispatch(closeApp("Settings"));
+          }}
+          minimizeApp={() => {
+            dispatch(minimizeApp("Settings"));
+          }}
+        />
       </div>
 
       <div className="mt-5 text-center text-lg">Windows Settings</div>

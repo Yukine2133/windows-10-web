@@ -4,6 +4,7 @@ import {
   AiOutlinePicture,
   AiOutlineFile,
   AiOutlineUser,
+  AiOutlineAppstore,
 } from "react-icons/ai";
 
 import { FaLaptop, FaGlobe, FaGamepad, FaAccessibleIcon } from "react-icons/fa";
@@ -14,7 +15,6 @@ import {
   MdLockOutline,
 } from "react-icons/md";
 import { RiBrush4Fill } from "react-icons/ri";
-import { AiOutlineAppstore } from "react-icons/ai";
 import { IoMdTime, IoIosSearch } from "react-icons/io";
 import { GrUpdate } from "react-icons/gr";
 
