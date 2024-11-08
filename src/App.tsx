@@ -49,7 +49,7 @@ const App = () => {
             !minimizedApps.includes("Calculator") && (
               <Calculator constraintRef={constraintRef} />
             )}
-          <Settings />
+          <Settings constraintRef={constraintRef} />
           <Taskbar />
         </div>
       )}

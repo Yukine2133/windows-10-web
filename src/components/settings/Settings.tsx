@@ -1,9 +1,22 @@
+import { motion } from "framer-motion";
 import { settingItems } from "../../utils/constants";
 import WindowControls from "../WindowControls";
 
-const Settings = () => {
+const Settings = ({
+  constraintRef,
+}: {
+  constraintRef: React.MutableRefObject<null>;
+}) => {
   return (
-    <div className="absolute  bg-black text-white top-[100px] left-20 w-[75rem] ">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      drag
+      dragConstraints={constraintRef}
+      dragMomentum={false}
+      className="absolute  bg-black text-white top-[100px] left-[18%] w-[75rem] "
+    >
       <div className="flex items-center  justify-between">
         <h3 className="px-4 text-sm">Settings</h3>
         <WindowControls closeApp={() => {}} minimizeApp={() => {}} />
@@ -28,7 +41,7 @@ const Settings = () => {
           );
         })}
       </section>
-    </div>
+    </motion.div>
   );
 };
 
