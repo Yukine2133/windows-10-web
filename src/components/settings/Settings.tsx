@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { settingItems } from "../../utils/constants";
 import WindowControls from "../WindowControls";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
+import { setPersonalization } from "../../redux/slices/settingsSlice";
 
 const Settings = ({
   constraintRef,
@@ -10,6 +11,8 @@ const Settings = ({
   constraintRef: React.MutableRefObject<null>;
 }) => {
   const dispatch = useAppDispatch();
+
+  const { isPersonalizationOpen } = useAppSelector((state) => state.settings);
 
   return (
     <motion.div
@@ -19,7 +22,7 @@ const Settings = ({
       drag
       dragConstraints={constraintRef}
       dragMomentum={false}
-      className="absolute  bg-black text-white top-[100px] left-[18%] w-[75rem] "
+      className="absolute  bg-black text-white top-[100px] left-[18%] w-[75rem]  overflow-y-auto h-[80%] scrollbar-hidden  "
     >
       <div className="flex items-center  justify-between">
         <h3 className="px-4 text-sm">Settings</h3>
@@ -33,25 +36,36 @@ const Settings = ({
         />
       </div>
 
-      <div className="mt-5 text-center text-lg">Windows Settings</div>
+      {isPersonalizationOpen ? (
+        <h1>Personalization</h1>
+      ) : (
+        <>
+          <div className="mt-5 text-center text-lg">Windows Settings</div>
 
-      <section className="grid p-12 grid-cols-4 gap-10">
-        {settingItems.map((setting) => {
-          const { desc, Icon, label, id } = setting;
-          return (
-            <div
-              key={id}
-              className="flex items-center gap-4 outline outline-1 outline-transparent hover:outline-[#191919] transition-colors duration-200 p-4"
-            >
-              <Icon className="size-7 text-[#731380]" />
-              <div className="flex flex-col gap-2">
-                <h4 className="text-sm">{label}</h4>
-                <h4 className="text-xs text-[#838383]">{desc}</h4>
-              </div>
-            </div>
-          );
-        })}
-      </section>
+          <section className="grid p-12 grid-cols-4 gap-10">
+            {settingItems.map((setting) => {
+              const { desc, Icon, label, id } = setting;
+              return (
+                <div
+                  onClick={() => {
+                    if (label === "Personalization") {
+                      dispatch(setPersonalization(true));
+                    }
+                  }}
+                  key={id}
+                  className="flex items-center gap-4 outline outline-1 outline-transparent hover:outline-[#191919] transition-colors duration-200 p-4"
+                >
+                  <Icon className="size-7 text-[#731380]" />
+                  <div className="flex flex-col gap-2">
+                    <h4 className="text-sm">{label}</h4>
+                    <h4 className="text-xs text-[#838383]">{desc}</h4>
+                  </div>
+                </div>
+              );
+            })}
+          </section>
+        </>
+      )}
     </motion.div>
   );
 };
