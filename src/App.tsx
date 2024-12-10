@@ -22,6 +22,7 @@ const App = () => {
     openedApps,
     minimizedApps,
   } = useAppSelector((state) => state.app);
+  const { wallpaper } = useAppSelector((state) => state.settings);
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,8 +39,8 @@ const App = () => {
         <div ref={constraintRef} className="relative  w-[100vw] h-[100vh]">
           <img
             className="h-full w-full absolute top-0 left-0 object-cover"
-            src="default-wallpaper.webp"
-            alt="Default Wallpaper"
+            src={wallpaper}
+            alt="Wallpaper"
             draggable="false"
             onError={() => console.log("Error loading wallpaper")}
             style={{ userSelect: "none" }}

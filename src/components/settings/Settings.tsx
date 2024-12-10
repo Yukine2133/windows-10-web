@@ -3,7 +3,11 @@ import { settingItems } from "../../utils/constants";
 import WindowControls from "../WindowControls";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
-import { setPersonalization } from "../../redux/slices/settingsSlice";
+import {
+  setPersonalization,
+  setWallpaper,
+} from "../../redux/slices/settingsSlice";
+import { useState } from "react";
 
 const Settings = ({
   constraintRef,
@@ -12,7 +16,14 @@ const Settings = ({
 }) => {
   const dispatch = useAppDispatch();
 
+  const [wallpaperInput, setWallpaperInput] = useState("");
+
   const { isPersonalizationOpen } = useAppSelector((state) => state.settings);
+
+  const handleWallpaperChange = () => {
+    dispatch(setWallpaper(wallpaperInput));
+    setWallpaperInput("");
+  };
 
   return (
     <motion.div
@@ -37,7 +48,17 @@ const Settings = ({
       </div>
 
       {isPersonalizationOpen ? (
-        <h1>Personalization</h1>
+        <div className="flex items-center justify-center flex-col p-3 space-y-4">
+          <h3 className="text-xl">Change wallpaper</h3>
+          <input
+            type="text"
+            value={wallpaperInput}
+            onChange={(e) => setWallpaperInput(e.target.value)}
+            placeholder="Add wallpaper URL"
+            className="outline-none bg-transparent bg-stone-900 w-1/2 rounded-sm"
+          />
+          <button onClick={handleWallpaperChange}>Change Wallpaper</button>
+        </div>
       ) : (
         <>
           <div className="mt-5 text-center text-lg">Windows Settings</div>
