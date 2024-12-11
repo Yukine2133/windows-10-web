@@ -17,6 +17,7 @@ const Settings = ({
   const dispatch = useAppDispatch();
 
   const [wallpaperInput, setWallpaperInput] = useState("");
+  const [isDragging, setIsDragging] = useState(true);
 
   const { isPersonalizationOpen } = useAppSelector((state) => state.settings);
 
@@ -30,12 +31,12 @@ const Settings = ({
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      drag
+      drag={isDragging}
       dragConstraints={constraintRef}
       dragMomentum={false}
-      className="absolute  bg-black text-white top-[100px] left-[18%] w-[75rem]  overflow-y-auto h-[80%] scrollbar-hidden  "
+      className="absolute bg-black text-white top-[100px] left-[18%] w-[75rem] overflow-y-auto h-[80%] scrollbar-hidden"
     >
-      <div className="flex items-center  justify-between">
+      <div className="flex items-center justify-between">
         <h3 className="px-4 text-sm">Settings</h3>
         <WindowControls
           closeApp={() => {
@@ -55,6 +56,8 @@ const Settings = ({
             value={wallpaperInput}
             onChange={(e) => setWallpaperInput(e.target.value)}
             placeholder="Add wallpaper URL"
+            onMouseEnter={() => setIsDragging(false)} // Disable drag when interacting
+            onMouseLeave={() => setIsDragging(true)} // Re-enable drag when done
             className="outline-none bg-transparent bg-stone-900 w-1/2 rounded-sm"
           />
           <button onClick={handleWallpaperChange}>Change Wallpaper</button>
