@@ -3,13 +3,9 @@ import { settingItems } from "../../utils/constants";
 import WindowControls from "../WindowControls";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
-import {
-  setPersonalization,
-  setWallpaper,
-} from "../../redux/slices/settingsSlice";
+import { setPersonalization } from "../../redux/slices/settingsSlice";
 import { useState } from "react";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../../firebase/firebase";
+import Personalization from "./Personalization";
 
 const Settings = ({
   constraintRef,
@@ -19,48 +15,8 @@ const Settings = ({
   const dispatch = useAppDispatch();
 
   const [isDragging, setIsDragging] = useState(true);
-  const [file, setFile] = useState<File | null>(null);
-  const [uploading, setUploading] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   const { isPersonalizationOpen } = useAppSelector((state) => state.settings);
-
-  const handleFileUpload = async () => {
-    if (!file) return;
-
-    setUploading(true);
-
-    try {
-      const storageRef = ref(storage, `wallpapers/${file.name}`);
-
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.ceil(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(progress);
-        },
-        (error) => {
-          // Handle errors
-          console.error("Upload failed:", error);
-          setUploading(false);
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-
-          dispatch(setWallpaper(downloadURL));
-          setUploading(false);
-          setFile(null);
-        }
-      );
-    } catch (error) {
-      console.error("Error uploading the file:", error);
-      setUploading(false);
-    }
-  };
 
   return (
     <motion.div
@@ -85,24 +41,7 @@ const Settings = ({
       </div>
 
       {isPersonalizationOpen ? (
-        <div className="flex items-center justify-center flex-col p-3 space-y-4">
-          <h3 className="text-xl">Change wallpaper</h3>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFile(e.target.files?.[0] || null)}
-            onMouseEnter={() => setIsDragging(false)}
-            onMouseLeave={() => setIsDragging(true)}
-            className="outline-none bg-transparent bg-stone-900 w-1/2 rounded-sm"
-          />
-          <button
-            onClick={handleFileUpload}
-            disabled={uploading || !file}
-            className="bg-blue-600 px-4 py-2 rounded-sm text-white disabled:bg-gray-500"
-          >
-            {uploading ? `Uploading... ${progress}%` : "Upload Wallpaper"}
-          </button>
-        </div>
+        <Personalization setIsDragging={setIsDragging} />
       ) : (
         <>
           <div className="mt-5 text-center text-lg">Windows Settings</div>
