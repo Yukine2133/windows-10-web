@@ -127,3 +127,18 @@ export const settingItems = [
     desc: "Windows Update, recovery backup",
   },
 ];
+
+export const contextMenuItems = [
+  {
+    label: "Create Folder",
+    action: () => {
+      alert("ddsds");
+    },
+  },
+  {
+    label: "Create Text Document",
+    action: () => {
+      alert("ddsds");
+    },
+  },
+];

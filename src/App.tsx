@@ -9,8 +9,13 @@ import ShutDownScreen from "./components/screens/ShutDownScreen";
 import Apps from "./components/apps/Apps";
 import Calculator from "./components/apps/Calculator";
 import Settings from "./components/settings/Settings";
+import ContextMenu from "./components/context-menu/ContextMenu";
+import useContextMenuLogic from "./hooks/useContextMenuLogic";
 
 const App = () => {
+  const { closeContextMenu, handleRightClick, contextMenu } =
+    useContextMenuLogic();
+
   const dispatch = useAppDispatch();
   const constraintRef = useRef(null);
   const {
@@ -29,8 +34,9 @@ const App = () => {
       dispatch(initiatePowerOnSequence());
     }, 2500);
   }, [dispatch]);
+
   return (
-    <main>
+    <main onContextMenu={handleRightClick}>
       {showLoadingScreen && <PowerOnScreen />}
       {showSleepScreen && <SleepScreen />}
       {showRestartScreen && <RestartScreen />}
@@ -54,9 +60,14 @@ const App = () => {
             !minimizedApps.includes("Settings") && (
               <Settings constraintRef={constraintRef} />
             )}
-
           <Taskbar />
         </div>
+      )}
+      {contextMenu.visible && (
+        <ContextMenu
+          position={contextMenu.position}
+          onClose={closeContextMenu}
+        />
       )}
     </main>
   );
