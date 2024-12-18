@@ -18,6 +18,12 @@ const Settings = ({
 
   const { isPersonalizationOpen } = useAppSelector((state) => state.settings);
 
+  const handleClick = (label: string) => {
+    if (label === "Personalization") {
+      dispatch(setPersonalization(true));
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -51,11 +57,7 @@ const Settings = ({
               const { desc, Icon, label, id } = setting;
               return (
                 <div
-                  onClick={() => {
-                    if (label === "Personalization") {
-                      dispatch(setPersonalization(true));
-                    }
-                  }}
+                  onClick={() => handleClick(label)}
                   key={id}
                   className="flex items-center gap-4 outline outline-1 outline-transparent hover:outline-[#191919] transition-colors duration-200 p-4"
                 >
