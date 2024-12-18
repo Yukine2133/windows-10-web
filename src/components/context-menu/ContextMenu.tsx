@@ -2,19 +2,19 @@ import { contextMenuItems } from "../../utils/constants";
 
 interface ContextMenuProps {
   position: { x: number; y: number };
-  onClose: () => void;
+  contextMenuRef: React.RefObject<HTMLDivElement>;
 }
 
-const ContextMenu = ({ position, onClose }: ContextMenuProps) => {
+const ContextMenu = ({ position, contextMenuRef }: ContextMenuProps) => {
   return (
     <div
-      className="absolute bg-[#2b2b2b] text-white rounded shadow-lg  text-center text-sm"
+      ref={contextMenuRef}
+      className="absolute bg-[#2b2b2b] text-white rounded shadow-lg text-center text-sm"
       style={{
         top: position.y,
         left: position.x,
         zIndex: 1000,
       }}
-      onClick={onClose}
     >
       {contextMenuItems.map((option, index) => (
         <div

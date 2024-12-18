@@ -8,22 +8,16 @@ import useAppLogicHook from "./hooks/useAppLogicHook";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
 
 const App = () => {
-  const {
-    constraintRef,
-    showApp,
-
-    openedApps,
-    minimizedApps,
-    wallpaper,
-  } = useAppLogicHook();
-  const { closeContextMenu, handleRightClick, contextMenu } =
+  const { constraintRef, showApp, openedApps, minimizedApps, wallpaper } =
+    useAppLogicHook();
+  const { handleRightClick, contextMenu, contextMenuRef } =
     useContextMenuLogicHook();
 
   return (
     <main onContextMenu={handleRightClick}>
-      <ScreenRenderer /> {/* Render the screen based on the state  */}
+      <ScreenRenderer /> {/* Render the screen based on the state */}
       {showApp && (
-        <div ref={constraintRef} className="relative  w-[100vw] h-[100vh]">
+        <div ref={constraintRef} className="relative w-[100vw] h-[100vh]">
           <img
             className="h-full w-full absolute top-0 left-0 object-cover"
             src={wallpaper}
@@ -47,7 +41,7 @@ const App = () => {
       {contextMenu.visible && (
         <ContextMenu
           position={contextMenu.position}
-          onClose={closeContextMenu}
+          contextMenuRef={contextMenuRef}
         />
       )}
     </main>
