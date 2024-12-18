@@ -1,8 +1,6 @@
-import { useEffect, useRef } from "react";
 import PowerOnScreen from "./components/screens/PowerOnScreen";
 import Taskbar from "./components/taskbar/Taskbar";
-import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
-import { initiatePowerOnSequence } from "./redux/slices/appSlice";
+
 import SleepScreen from "./components/screens/SleepScreen";
 import RestartScreen from "./components/screens/RestartScreen";
 import ShutDownScreen from "./components/screens/ShutDownScreen";
@@ -10,15 +8,12 @@ import Apps from "./components/apps/Apps";
 import Calculator from "./components/apps/Calculator";
 import Settings from "./components/settings/Settings";
 import ContextMenu from "./components/context-menu/ContextMenu";
-import useContextMenuLogic from "./hooks/useContextMenuLogic";
+import useContextMenuLogicHook from "./hooks/useContextMenuLogicHook";
+import useAppLogicHook from "./hooks/useAppLogicHook";
 
 const App = () => {
-  const { closeContextMenu, handleRightClick, contextMenu } =
-    useContextMenuLogic();
-
-  const dispatch = useAppDispatch();
-  const constraintRef = useRef(null);
   const {
+    constraintRef,
     showApp,
     showLoadingScreen,
     showSleepScreen,
@@ -26,14 +21,10 @@ const App = () => {
     showShutDownScreen,
     openedApps,
     minimizedApps,
-  } = useAppSelector((state) => state.app);
-  const { wallpaper } = useAppSelector((state) => state.settings);
-
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(initiatePowerOnSequence());
-    }, 2500);
-  }, [dispatch]);
+    wallpaper,
+  } = useAppLogicHook();
+  const { closeContextMenu, handleRightClick, contextMenu } =
+    useContextMenuLogicHook();
 
   return (
     <main onContextMenu={handleRightClick}>

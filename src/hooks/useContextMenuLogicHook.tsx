@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useContextMenuLogic = () => {
+const useContextMenuLogicHook = () => {
   const [contextMenu, setContextMenu] = useState<{
     visible: boolean;
     position: { x: number; y: number };
@@ -24,4 +24,4 @@ const useContextMenuLogic = () => {
   };
 };
 
-export default useContextMenuLogic;
+export default useContextMenuLogicHook;
