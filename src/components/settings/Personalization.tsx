@@ -70,14 +70,17 @@ const Personalization = ({
         </h6>
       </button>
       <div className="flex items-center justify-center flex-col p-3 space-y-4">
-        <h3 className="text-xl">Change wallpaper</h3>
+        <label htmlFor="file-upload" className="text-xl cursor-pointer">
+          Change wallpaper
+        </label>
         <input
           type="file"
+          id="file-upload"
           accept="image/*"
           onChange={(e) => setFile(e.target.files?.[0] || null)}
           onMouseEnter={() => setIsDragging(false)}
           onMouseLeave={() => setIsDragging(true)}
-          className="outline-none bg-transparent bg-stone-900 w-1/2 rounded-sm"
+          className="outline-none bg-transparent bg-stone-900 w-1/2 rounded-sm hidden"
         />
         <button
           onClick={handleFileUpload}
