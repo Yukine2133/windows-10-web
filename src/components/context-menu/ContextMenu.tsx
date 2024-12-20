@@ -1,4 +1,5 @@
-import { contextMenuItems } from "../../utils/constants";
+import { useDispatch } from "react-redux";
+import { getContextMenuItems } from "../../utils/constants";
 
 interface ContextMenuProps {
   position: { x: number; y: number };
@@ -6,6 +7,10 @@ interface ContextMenuProps {
 }
 
 const ContextMenu = ({ position, contextMenuRef }: ContextMenuProps) => {
+  const dispatch = useDispatch();
+
+  const menuItems = getContextMenuItems(dispatch);
+
   return (
     <div
       ref={contextMenuRef}
@@ -16,7 +21,7 @@ const ContextMenu = ({ position, contextMenuRef }: ContextMenuProps) => {
         zIndex: 1000,
       }}
     >
-      {contextMenuItems.map((option, index) => (
+      {menuItems.map((option, index) => (
         <div
           key={index}
           className="px-4 py-2 hover:bg-[#414141] cursor-pointer"

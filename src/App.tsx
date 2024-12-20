@@ -6,6 +6,7 @@ import ContextMenu from "./components/context-menu/ContextMenu";
 import useContextMenuLogicHook from "./hooks/useContextMenuLogicHook";
 import useAppLogicHook from "./hooks/useAppLogicHook";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
+import Folder from "./components/folder/Folder";
 
 const App = () => {
   const { constraintRef, showApp, openedApps, minimizedApps, wallpaper } =
@@ -27,6 +28,7 @@ const App = () => {
             style={{ userSelect: "none" }}
           />
           <Apps />
+          <Folder />
           {openedApps.includes("Calculator") &&
             !minimizedApps.includes("Calculator") && (
               <Calculator constraintRef={constraintRef} />
