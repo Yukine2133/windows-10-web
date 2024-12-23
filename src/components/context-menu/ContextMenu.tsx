@@ -4,12 +4,17 @@ import { getContextMenuItems } from "../../utils/constants";
 interface ContextMenuProps {
   position: { x: number; y: number };
   contextMenuRef: React.RefObject<HTMLDivElement>;
+  closeContextMenu: () => void;
 }
 
-const ContextMenu = ({ position, contextMenuRef }: ContextMenuProps) => {
+const ContextMenu = ({
+  position,
+  contextMenuRef,
+  closeContextMenu,
+}: ContextMenuProps) => {
   const dispatch = useDispatch();
 
-  const menuItems = getContextMenuItems(dispatch);
+  const menuItems = getContextMenuItems(dispatch, closeContextMenu);
 
   return (
     <div

@@ -145,11 +145,15 @@ export const contextMenuItems = [
   },
 ];
 
-export const getContextMenuItems = (dispatch: Dispatch<AnyAction>) => [
+export const getContextMenuItems = (
+  dispatch: Dispatch<AnyAction>,
+  closeContextMenu: () => void
+) => [
   {
     label: "Create Folder",
     action: () => {
       dispatch(addFolder());
+      closeContextMenu();
     },
   },
   {

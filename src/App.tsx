@@ -11,7 +11,7 @@ import Folder from "./components/folder/Folder";
 const App = () => {
   const { constraintRef, showApp, openedApps, minimizedApps, wallpaper } =
     useAppLogicHook();
-  const { handleRightClick, contextMenu, contextMenuRef } =
+  const { handleRightClick, contextMenu, contextMenuRef, closeContextMenu } =
     useContextMenuLogicHook();
 
   return (
@@ -42,6 +42,7 @@ const App = () => {
       )}
       {contextMenu.visible && (
         <ContextMenu
+          closeContextMenu={closeContextMenu}
           position={contextMenu.position}
           contextMenuRef={contextMenuRef}
         />
