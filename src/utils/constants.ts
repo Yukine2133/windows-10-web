@@ -18,7 +18,7 @@ import { RiBrush4Fill } from "react-icons/ri";
 import { IoMdTime, IoIosSearch } from "react-icons/io";
 import { GrUpdate } from "react-icons/gr";
 import { AnyAction, Dispatch } from "@reduxjs/toolkit";
-import { addFolder } from "../redux/slices/folderSlice";
+import { addFolder, addTextDocument } from "../redux/slices/desktopItemsSlice";
 
 export const menuItems = [
   { Icon: AiOutlineUser, label: "User" },
@@ -159,7 +159,8 @@ export const getContextMenuItems = (
   {
     label: "Create Text Document",
     action: () => {
-      alert("Text Document Created!");
+      dispatch(addTextDocument());
+      closeContextMenu();
     },
   },
 ];
