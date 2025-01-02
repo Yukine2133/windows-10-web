@@ -24,10 +24,16 @@ const desktopItemsSlice = createSlice({
       state.folders.push(newFolderName);
       localStorage.setItem("folders", JSON.stringify(state.folders));
     },
-    removeFolder: (state, action: PayloadAction<number>) => {
-      state.folders.splice(action.payload, 1);
-      localStorage.setItem("folders", JSON.stringify(state.folders));
+    removeFolder: (state, action: PayloadAction<string>) => {
+      const folderIndex = state.folders.findIndex(
+        (folder) => folder === action.payload
+      );
+      if (folderIndex !== -1) {
+        state.folders.splice(folderIndex, 1);
+        localStorage.setItem("folders", JSON.stringify(state.folders));
+      }
     },
+
     addTextDocument: (state) => {
       const newTextDocumentName = `New Text Document ${
         state.textDocuments.length + 1

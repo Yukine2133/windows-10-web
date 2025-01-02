@@ -1,20 +1,28 @@
 import { useDispatch } from "react-redux";
-import { getContextMenuItems } from "../../utils/constants";
+import {
+  getContextMenuItems,
+  getContextMenuItemsDesktop,
+} from "../../utils/constants";
 
 interface ContextMenuProps {
   position: { x: number; y: number };
   contextMenuRef: React.RefObject<HTMLDivElement>;
   closeContextMenu: () => void;
+  targetItem: string;
 }
 
 const ContextMenu = ({
   position,
   contextMenuRef,
   closeContextMenu,
+  targetItem,
 }: ContextMenuProps) => {
   const dispatch = useDispatch();
 
-  const menuItems = getContextMenuItems(dispatch, closeContextMenu);
+  const foo =
+    targetItem === "Desktop"
+      ? getContextMenuItemsDesktop(dispatch, closeContextMenu)
+      : getContextMenuItems(dispatch, closeContextMenu, targetItem);
 
   return (
     <div
@@ -26,7 +34,7 @@ const ContextMenu = ({
         zIndex: 1000,
       }}
     >
-      {menuItems.map((option, index) => (
+      {foo.map((option, index) => (
         <div
           key={index}
           className="px-4 py-2 hover:bg-[#414141] cursor-pointer"

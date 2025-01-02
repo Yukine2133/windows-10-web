@@ -1,24 +1,28 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const useContextMenuLogicHook = () => {
+export const useContextMenuLogicHook = () => {
   const [contextMenu, setContextMenu] = useState<{
     visible: boolean;
     position: { x: number; y: number };
-  }>({ visible: false, position: { x: 0, y: 0 } });
+    targetItem: { name: string; type: string } | null;
+  }>({ visible: false, position: { x: 0, y: 0 }, targetItem: null });
 
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
 
-  const handleRightClick = (e: React.MouseEvent) => {
+  const handleRightClick = (
+    e: React.MouseEvent,
+    targetItem: { name: string; type: string } | null = null
+  ) => {
     e.preventDefault();
     setContextMenu({
       visible: true,
       position: { x: e.clientX, y: e.clientY },
+      targetItem,
     });
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const closeContextMenu = () => {
-    setContextMenu({ ...contextMenu, visible: false });
+    setContextMenu({ ...contextMenu, visible: false, targetItem: null });
   };
 
   useEffect(() => {
@@ -43,7 +47,6 @@ const useContextMenuLogicHook = () => {
     closeContextMenu,
     contextMenu,
     contextMenuRef,
+    targetItem: contextMenu.targetItem,
   };
 };
-
-export default useContextMenuLogicHook;

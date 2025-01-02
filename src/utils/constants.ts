@@ -18,7 +18,11 @@ import { RiBrush4Fill } from "react-icons/ri";
 import { IoMdTime, IoIosSearch } from "react-icons/io";
 import { GrUpdate } from "react-icons/gr";
 import { AnyAction, Dispatch } from "@reduxjs/toolkit";
-import { addFolder, addTextDocument } from "../redux/slices/desktopItemsSlice";
+import {
+  addFolder,
+  addTextDocument,
+  removeFolder,
+} from "../redux/slices/desktopItemsSlice";
 
 export const menuItems = [
   { Icon: AiOutlineUser, label: "User" },
@@ -146,6 +150,28 @@ export const contextMenuItems = [
 ];
 
 export const getContextMenuItems = (
+  dispatch: Dispatch<AnyAction>,
+  closeContextMenu: () => void,
+  targetItem: string
+) => [
+  {
+    label: "Rename",
+    action: () => {
+      alert("Rename");
+      closeContextMenu();
+    },
+  },
+  {
+    label: "Delete",
+    action: () => {
+      dispatch(removeFolder(targetItem));
+
+      closeContextMenu();
+    },
+  },
+];
+
+export const getContextMenuItemsDesktop = (
   dispatch: Dispatch<AnyAction>,
   closeContextMenu: () => void
 ) => [

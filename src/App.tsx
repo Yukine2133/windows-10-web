@@ -3,7 +3,7 @@ import Apps from "./components/apps/Apps";
 import Calculator from "./components/apps/Calculator";
 import Settings from "./components/settings/Settings";
 import ContextMenu from "./components/context-menu/ContextMenu";
-import useContextMenuLogicHook from "./hooks/useContextMenuLogicHook";
+import { useContextMenuLogicHook } from "./hooks/useContextMenuLogicHook";
 import useAppLogicHook from "./hooks/useAppLogicHook";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
 import DesktopItemsContainer from "./components/context-menu/DesktopItemsContainer";
@@ -45,6 +45,7 @@ const App = () => {
           closeContextMenu={closeContextMenu}
           position={contextMenu.position}
           contextMenuRef={contextMenuRef}
+          targetItem="Desktop"
         />
       )}
     </main>
