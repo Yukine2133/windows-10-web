@@ -44,9 +44,18 @@ const desktopItemsSlice = createSlice({
         JSON.stringify(state.textDocuments)
       );
     },
+    removeTextDocument: (state, action: PayloadAction<string>) => {
+      state.textDocuments = state.textDocuments.filter(
+        (doc) => doc !== action.payload
+      );
+      localStorage.setItem(
+        "textDocuments",
+        JSON.stringify(state.textDocuments)
+      );
+    },
   },
 });
 
-export const { addFolder, removeFolder, addTextDocument } =
+export const { addFolder, removeFolder, addTextDocument, removeTextDocument } =
   desktopItemsSlice.actions;
 export default desktopItemsSlice.reducer;

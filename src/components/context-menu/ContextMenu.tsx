@@ -24,7 +24,7 @@ const ContextMenu = ({
   const options =
     targetItem.type === "Desktop"
       ? getContextMenuItemsDesktop(dispatch, closeContextMenu)
-      : getContextMenuItems(dispatch, closeContextMenu, targetItem.name);
+      : getContextMenuItems(dispatch, closeContextMenu, targetItem);
 
   return (
     <div

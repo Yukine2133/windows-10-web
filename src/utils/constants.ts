@@ -22,6 +22,7 @@ import {
   addFolder,
   addTextDocument,
   removeFolder,
+  removeTextDocument,
 } from "../redux/slices/desktopItemsSlice";
 
 export const menuItems = [
@@ -152,7 +153,9 @@ export const contextMenuItems = [
 export const getContextMenuItems = (
   dispatch: Dispatch<AnyAction>,
   closeContextMenu: () => void,
-  targetItem: string
+  targetItem: {
+    name: string;
+  }
 ) => [
   {
     label: "Rename",
@@ -164,7 +167,11 @@ export const getContextMenuItems = (
   {
     label: "Delete",
     action: () => {
-      dispatch(removeFolder(targetItem));
+      if (targetItem.name.toLowerCase().includes("folder")) {
+        dispatch(removeFolder(targetItem.name));
+      } else if (targetItem.name.toLowerCase().includes("text document")) {
+        dispatch(removeTextDocument(targetItem.name));
+      }
 
       closeContextMenu();
     },
