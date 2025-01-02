@@ -30,12 +30,12 @@ const DesktopItemsContainer = () => {
           ))}
         </div>
       </div>
-      {contextMenu.visible && (
+      {contextMenu.visible && contextMenu.targetItem && (
         <ContextMenu
           closeContextMenu={closeContextMenu}
           position={contextMenu.position}
           contextMenuRef={contextMenuRef}
-          targetItem="Item"
+          targetItem={contextMenu.targetItem}
         />
       )}
     </>

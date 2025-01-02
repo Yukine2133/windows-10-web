@@ -7,6 +7,7 @@ import { useContextMenuLogicHook } from "./hooks/useContextMenuLogicHook";
 import useAppLogicHook from "./hooks/useAppLogicHook";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
 import DesktopItemsContainer from "./components/context-menu/DesktopItemsContainer";
+import React from "react";
 
 const App = () => {
   const { constraintRef, showApp, openedApps, minimizedApps, wallpaper } =
@@ -15,7 +16,11 @@ const App = () => {
     useContextMenuLogicHook();
 
   return (
-    <main onContextMenu={handleRightClick}>
+    <main
+      onContextMenu={(e: React.MouseEvent) => {
+        handleRightClick(e, { name: "Desktop", type: "Desktop" });
+      }}
+    >
       <ScreenRenderer /> {/* Render the screen based on the state */}
       {showApp && (
         <div ref={constraintRef} className="relative w-[100vw] h-[100vh]">
@@ -45,7 +50,7 @@ const App = () => {
           closeContextMenu={closeContextMenu}
           position={contextMenu.position}
           contextMenuRef={contextMenuRef}
-          targetItem="Desktop"
+          targetItem={contextMenu.targetItem}
         />
       )}
     </main>

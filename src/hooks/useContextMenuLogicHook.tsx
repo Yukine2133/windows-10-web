@@ -21,6 +21,7 @@ export const useContextMenuLogicHook = () => {
     });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const closeContextMenu = () => {
     setContextMenu({ ...contextMenu, visible: false, targetItem: null });
   };
@@ -41,7 +42,6 @@ export const useContextMenuLogicHook = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [closeContextMenu]);
-
   return {
     handleRightClick,
     closeContextMenu,

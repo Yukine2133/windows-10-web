@@ -8,7 +8,7 @@ interface ContextMenuProps {
   position: { x: number; y: number };
   contextMenuRef: React.RefObject<HTMLDivElement>;
   closeContextMenu: () => void;
-  targetItem: string;
+  targetItem: { name: string; type: string } | null;
 }
 
 const ContextMenu = ({
@@ -19,10 +19,12 @@ const ContextMenu = ({
 }: ContextMenuProps) => {
   const dispatch = useDispatch();
 
-  const foo =
-    targetItem === "Desktop"
+  if (!targetItem) return null;
+
+  const options =
+    targetItem.type === "Desktop"
       ? getContextMenuItemsDesktop(dispatch, closeContextMenu)
-      : getContextMenuItems(dispatch, closeContextMenu, targetItem);
+      : getContextMenuItems(dispatch, closeContextMenu, targetItem.name);
 
   return (
     <div
@@ -34,7 +36,7 @@ const ContextMenu = ({
         zIndex: 1000,
       }}
     >
-      {foo.map((option, index) => (
+      {options.map((option, index) => (
         <div
           key={index}
           className="px-4 py-2 hover:bg-[#414141] cursor-pointer"
