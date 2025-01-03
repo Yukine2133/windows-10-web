@@ -38,7 +38,11 @@ const DesktopItem = ({
       className="first:ml-16 flex flex-col  items-center text-white cursor-pointer"
       style={{ width: "70px" }}
     >
-      <img src={icon} alt="Item icon" className="size-10" />
+      <img
+        src={icon}
+        alt="Item icon"
+        className={`${type === "folder" ? "size-10" : "size-9"}`}
+      />
       <span
         onDoubleClick={() => setIsRenaming(true)}
         className="text-[11.5px] text-center  w-full"
