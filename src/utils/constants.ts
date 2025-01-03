@@ -21,6 +21,7 @@ import { AnyAction, Dispatch } from "@reduxjs/toolkit";
 import {
   addFolder,
   addTextDocument,
+  DesktopItem,
   removeFolder,
   removeTextDocument,
 } from "../redux/slices/desktopItemsSlice";
@@ -153,14 +154,17 @@ export const contextMenuItems = [
 export const getContextMenuItems = (
   dispatch: Dispatch<AnyAction>,
   closeContextMenu: () => void,
-  targetItem: {
-    name: string;
-  }
+  targetItem: DesktopItem
 ) => [
   {
     label: "Rename",
     action: () => {
-      alert("Rename");
+      const itemElement = document.querySelector(
+        `[data-order='${targetItem.order}']`
+      );
+      if (itemElement) {
+        itemElement.dispatchEvent(new Event("dblclick"));
+      }
       closeContextMenu();
     },
   },

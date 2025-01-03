@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface DesktopItem {
+export interface DesktopItem {
   name: string;
   type: "folder" | "textDocument";
   order: number;
@@ -58,9 +58,25 @@ const desktopItemsSlice = createSlice({
       );
       localStorage.setItem("desktopItems", JSON.stringify(state.items));
     },
+    renameItem: (
+      state,
+      action: PayloadAction<{ order: number; newName: string }>
+    ) => {
+      const { order, newName } = action.payload;
+      const item = state.items.find((item) => item.order === order);
+      if (item) {
+        item.name = newName;
+        localStorage.setItem("desktopItems", JSON.stringify(state.items));
+      }
+    },
   },
 });
 
-export const { addFolder, addTextDocument, removeFolder, removeTextDocument } =
-  desktopItemsSlice.actions;
+export const {
+  addFolder,
+  addTextDocument,
+  removeFolder,
+  removeTextDocument,
+  renameItem,
+} = desktopItemsSlice.actions;
 export default desktopItemsSlice.reducer;

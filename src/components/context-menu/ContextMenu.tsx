@@ -3,6 +3,7 @@ import {
   getContextMenuItems,
   getContextMenuItemsDesktop,
 } from "../../utils/constants";
+import { DesktopItem } from "../../redux/slices/desktopItemsSlice";
 
 interface ContextMenuProps {
   position: { x: number; y: number };
@@ -24,7 +25,11 @@ const ContextMenu = ({
   const options =
     targetItem.type === "Desktop"
       ? getContextMenuItemsDesktop(dispatch, closeContextMenu)
-      : getContextMenuItems(dispatch, closeContextMenu, targetItem);
+      : getContextMenuItems(
+          dispatch,
+          closeContextMenu,
+          targetItem as DesktopItem
+        );
 
   return (
     <div

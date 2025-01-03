@@ -22,6 +22,8 @@ const DesktopItemsContainer = () => {
               key={index}
               name={item.name}
               icon={item.type === "folder" ? "folder.png" : "text-document.png"}
+              order={item.order}
+              type={item.type}
             />
           ))}
         </div>
