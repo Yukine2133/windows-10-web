@@ -1,61 +1,66 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface DesktopItemsSliceState {
-  folders: string[];
-  textDocuments: string[];
+interface DesktopItem {
+  name: string;
+  type: "folder" | "textDocument";
+  order: number;
 }
 
-const loadFromLocalStorage = (name: string): string[] => {
-  const storedDesktopItems = localStorage.getItem(`${name}`);
-  return storedDesktopItems ? JSON.parse(storedDesktopItems) : [];
+interface DesktopItemsSliceState {
+  items: DesktopItem[];
+}
+
+const loadFromLocalStorage = (): DesktopItem[] => {
+  const storedItems = localStorage.getItem("desktopItems");
+  return storedItems ? JSON.parse(storedItems) : [];
 };
 
 const initialState: DesktopItemsSliceState = {
-  folders: loadFromLocalStorage("folders"),
-  textDocuments: loadFromLocalStorage("textDocuments"),
+  items: loadFromLocalStorage(),
 };
 
 const desktopItemsSlice = createSlice({
-  name: "folders",
+  name: "desktopItems",
   initialState,
   reducers: {
     addFolder: (state) => {
-      const newFolderName = `New Folder ${state.folders.length + 1}`;
-      state.folders.push(newFolderName);
-      localStorage.setItem("folders", JSON.stringify(state.folders));
+      const newFolder = {
+        name: `New Folder ${
+          state.items.filter((item) => item.type === "folder").length + 1
+        }`,
+        type: "folder",
+        order: state.items.length + 1,
+      };
+      state.items.push(newFolder as DesktopItem);
+      localStorage.setItem("desktopItems", JSON.stringify(state.items));
+    },
+    addTextDocument: (state) => {
+      const newTextDocument = {
+        name: `New Text Document ${
+          state.items.filter((item) => item.type === "textDocument").length + 1
+        }`,
+        type: "textDocument",
+        order: state.items.length + 1,
+      };
+      state.items.push(newTextDocument as DesktopItem);
+      localStorage.setItem("desktopItems", JSON.stringify(state.items));
     },
     removeFolder: (state, action: PayloadAction<string>) => {
-      const folderIndex = state.folders.findIndex(
-        (folder) => folder === action.payload
+      state.items = state.items.filter(
+        (item) => !(item.type === "folder" && item.name === action.payload)
       );
-      if (folderIndex !== -1) {
-        state.folders.splice(folderIndex, 1);
-        localStorage.setItem("folders", JSON.stringify(state.folders));
-      }
-    },
-
-    addTextDocument: (state) => {
-      const newTextDocumentName = `New Text Document ${
-        state.textDocuments.length + 1
-      }`;
-      state.textDocuments.push(newTextDocumentName);
-      localStorage.setItem(
-        "textDocuments",
-        JSON.stringify(state.textDocuments)
-      );
+      localStorage.setItem("desktopItems", JSON.stringify(state.items));
     },
     removeTextDocument: (state, action: PayloadAction<string>) => {
-      state.textDocuments = state.textDocuments.filter(
-        (doc) => doc !== action.payload
+      state.items = state.items.filter(
+        (item) =>
+          !(item.type === "textDocument" && item.name === action.payload)
       );
-      localStorage.setItem(
-        "textDocuments",
-        JSON.stringify(state.textDocuments)
-      );
+      localStorage.setItem("desktopItems", JSON.stringify(state.items));
     },
   },
 });
 
-export const { addFolder, removeFolder, addTextDocument, removeTextDocument } =
+export const { addFolder, addTextDocument, removeFolder, removeTextDocument } =
   desktopItemsSlice.actions;
 export default desktopItemsSlice.reducer;

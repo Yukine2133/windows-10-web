@@ -4,28 +4,24 @@ import ContextMenu from "./ContextMenu";
 import DesktopItem from "./DesktopItem";
 
 const DesktopItemsContainer = () => {
-  const { folders, textDocuments } = useAppSelector(
-    (state) => state.desktopItems
-  );
+  const items = useAppSelector((state) => state.desktopItems.items);
 
   const { handleRightClick, contextMenu, contextMenuRef, closeContextMenu } =
     useContextMenuLogicHook();
 
-  const items = [
-    ...folders.map((folder) => ({ name: folder, icon: "folder.png" })),
-    ...textDocuments.map((doc) => ({ name: doc, icon: "text-document.png" })),
-  ];
+  // Sort items by creation order
+  const sortedItems = [...items].sort((a, b) => a.order - b.order);
 
   return (
     <>
       <div className="relative p-2 h-full w-full">
         <div className="flex flex-wrap items-start gap-2">
-          {items.map((item, index) => (
+          {sortedItems.map((item, index) => (
             <DesktopItem
               handleRightClick={handleRightClick}
               key={index}
               name={item.name}
-              icon={item.icon}
+              icon={item.type === "folder" ? "folder.png" : "text-document.png"}
             />
           ))}
         </div>
