@@ -3,24 +3,16 @@ import Apps from "./components/apps/Apps";
 import Calculator from "./components/apps/Calculator";
 import Settings from "./components/settings/Settings";
 import ContextMenu from "./components/context-menu/ContextMenu";
-import { useContextMenuLogicHook } from "./hooks/useContextMenuLogicHook";
 import useAppLogicHook from "./hooks/useAppLogicHook";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
 import DesktopItemsContainer from "./components/context-menu/DesktopItemsContainer";
-import React from "react";
 
 const App = () => {
   const { constraintRef, showApp, openedApps, minimizedApps, wallpaper } =
     useAppLogicHook();
-  const { handleRightClick, contextMenu, contextMenuRef, closeContextMenu } =
-    useContextMenuLogicHook();
 
   return (
-    <main
-      onContextMenu={(e: React.MouseEvent) => {
-        handleRightClick(e, { name: "Desktop", type: "Desktop" });
-      }}
-    >
+    <main>
       <ScreenRenderer /> {/* Render the screen based on the state */}
       {showApp && (
         <div ref={constraintRef} className="relative w-[100vw] h-[100vh]">
@@ -45,14 +37,7 @@ const App = () => {
           <Taskbar />
         </div>
       )}
-      {contextMenu.visible && (
-        <ContextMenu
-          closeContextMenu={closeContextMenu}
-          position={contextMenu.position}
-          contextMenuRef={contextMenuRef}
-          targetItem={contextMenu.targetItem}
-        />
-      )}
+      <ContextMenu />
     </main>
   );
 };

@@ -4,23 +4,16 @@ import {
   getContextMenuItemsDesktop,
 } from "../../utils/constants";
 import { DesktopItem } from "../../redux/slices/desktopItemsSlice";
+import { useContextMenuLogicHook } from "../../hooks/useContextMenuLogicHook";
 
-interface ContextMenuProps {
-  position: { x: number; y: number };
-  contextMenuRef: React.RefObject<HTMLDivElement>;
-  closeContextMenu: () => void;
-  targetItem: { name: string; type: string } | null;
-}
-
-const ContextMenu = ({
-  position,
-  contextMenuRef,
-  closeContextMenu,
-  targetItem,
-}: ContextMenuProps) => {
+const ContextMenu = () => {
   const dispatch = useDispatch();
+  const { contextMenu, closeContextMenu, contextMenuRef } =
+    useContextMenuLogicHook();
 
-  if (!targetItem) return null;
+  if (!contextMenu.visible || !contextMenu.targetItem) return null;
+
+  const { position, targetItem } = contextMenu;
 
   const options =
     targetItem.type === "Desktop"

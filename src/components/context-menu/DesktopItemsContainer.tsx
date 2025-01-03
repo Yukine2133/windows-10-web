@@ -6,8 +6,7 @@ import DesktopItem from "./DesktopItem";
 const DesktopItemsContainer = () => {
   const items = useAppSelector((state) => state.desktopItems.items);
 
-  const { handleRightClick, contextMenu, contextMenuRef, closeContextMenu } =
-    useContextMenuLogicHook();
+  const { handleRightClick, contextMenu } = useContextMenuLogicHook();
 
   // Sort items by creation order
   const sortedItems = [...items].sort((a, b) => a.order - b.order);
@@ -28,14 +27,7 @@ const DesktopItemsContainer = () => {
           ))}
         </div>
       </div>
-      {contextMenu.visible && contextMenu.targetItem && (
-        <ContextMenu
-          closeContextMenu={closeContextMenu}
-          position={contextMenu.position}
-          contextMenuRef={contextMenuRef}
-          targetItem={contextMenu.targetItem}
-        />
-      )}
+      {contextMenu.visible && contextMenu.targetItem && <ContextMenu />}
     </>
   );
 };
