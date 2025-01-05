@@ -10,11 +10,13 @@ interface DesktopItemsSliceState {
   items: DesktopItem[];
 }
 
+// Load items from localStorage
 const loadFromLocalStorage = (): DesktopItem[] => {
   const storedItems = localStorage.getItem("desktopItems");
   return storedItems ? JSON.parse(storedItems) : [];
 };
 
+// Initial state
 const initialState: DesktopItemsSliceState = {
   items: loadFromLocalStorage(),
 };
@@ -47,14 +49,13 @@ const desktopItemsSlice = createSlice({
     },
     removeFolder: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter(
-        (item) => !(item.type === "folder" && item.name === action.payload)
+        (item) => item.type !== "folder" || item.name !== action.payload
       );
       localStorage.setItem("desktopItems", JSON.stringify(state.items));
     },
     removeTextDocument: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter(
-        (item) =>
-          !(item.type === "textDocument" && item.name === action.payload)
+        (item) => item.type !== "textDocument" || item.name !== action.payload
       );
       localStorage.setItem("desktopItems", JSON.stringify(state.items));
     },

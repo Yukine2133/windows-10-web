@@ -159,6 +159,7 @@ export const getContextMenuItems = (
   {
     label: "Rename",
     action: () => {
+      // Here, you can trigger a double-click event or show an input for renaming
       const itemElement = document.querySelector(
         `[data-order='${targetItem.order}']`
       );
@@ -171,12 +172,11 @@ export const getContextMenuItems = (
   {
     label: "Delete",
     action: () => {
-      if (targetItem.name.toLowerCase().includes("folder")) {
+      if (targetItem.type === "folder") {
         dispatch(removeFolder(targetItem.name));
-      } else if (targetItem.name.toLowerCase().includes("text document")) {
+      } else if (targetItem.type === "textDocument") {
         dispatch(removeTextDocument(targetItem.name));
       }
-
       closeContextMenu();
     },
   },
