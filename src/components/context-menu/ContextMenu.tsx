@@ -1,30 +1,17 @@
-import { closeContextMenu } from "../../redux/slices/contextMenuSlice";
-import {
-  getContextMenuItems,
-  getContextMenuItemsDesktop,
-} from "../../utils/constants";
-import { DesktopItem } from "../../redux/slices/desktopItemsSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { useContextMenuLogicHook } from "../../hooks/useContextMenuLogicHook";
 
 const ContextMenu = () => {
-  const dispatch = useAppDispatch();
-  const { visible, position, targetItem } = useAppSelector(
-    (state) => state.contextMenu
-  );
+  const contextMenu = useContextMenuLogicHook();
 
-  if (!visible || !targetItem) return null;
+  if (!contextMenu) {
+    return null;
+  }
 
-  const options =
-    targetItem.type === "Desktop"
-      ? getContextMenuItemsDesktop(dispatch, () => dispatch(closeContextMenu()))
-      : getContextMenuItems(
-          dispatch,
-          () => dispatch(closeContextMenu()),
-          targetItem as DesktopItem
-        );
+  const { position, options, contextMenuRef } = contextMenu;
 
   return (
     <div
+      ref={contextMenuRef}
       className="absolute bg-[#2b2b2b] text-white rounded shadow-lg text-center text-sm"
       style={{
         top: position.y,

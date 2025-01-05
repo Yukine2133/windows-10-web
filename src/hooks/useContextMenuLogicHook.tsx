@@ -1,30 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { closeContextMenu } from "../redux/slices/contextMenuSlice";
+import { useAppDispatch, useAppSelector } from "./reduxHooks";
+import {
+  getContextMenuItems,
+  getContextMenuItemsDesktop,
+} from "../utils/constants";
+import { DesktopItem } from "../redux/slices/desktopItemsSlice";
 
 export const useContextMenuLogicHook = () => {
-  const [contextMenu, setContextMenu] = useState<{
-    visible: boolean;
-    position: { x: number; y: number };
-    targetItem: { name: string; type: string } | null;
-  }>({ visible: false, position: { x: 0, y: 0 }, targetItem: null });
-
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
 
-  const handleRightClick = (
-    e: React.MouseEvent,
-    targetItem: { name: string; type: string } | null = null
-  ) => {
-    e.preventDefault();
-    setContextMenu({
-      visible: true,
-      position: { x: e.clientX, y: e.clientY },
-      targetItem,
-    });
-  };
+  const dispatch = useAppDispatch();
+  const { visible, position, targetItem } = useAppSelector(
+    (state) => state.contextMenu
+  );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const closeContextMenu = () => {
-    setContextMenu({ ...contextMenu, visible: false, targetItem: null });
-  };
+  const options =
+    targetItem?.type === "Desktop"
+      ? getContextMenuItemsDesktop(dispatch, () => dispatch(closeContextMenu()))
+      : getContextMenuItems(
+          dispatch,
+          () => dispatch(closeContextMenu()),
+          targetItem as DesktopItem
+        );
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -32,7 +30,7 @@ export const useContextMenuLogicHook = () => {
         contextMenuRef.current &&
         !contextMenuRef.current.contains(e.target as Node)
       ) {
-        closeContextMenu();
+        dispatch(closeContextMenu());
       }
     };
 
@@ -41,12 +39,15 @@ export const useContextMenuLogicHook = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [closeContextMenu]);
+  }, [dispatch]);
+
+  if (!visible || !targetItem) {
+    return null;
+  }
+
   return {
-    handleRightClick,
-    closeContextMenu,
-    contextMenu,
+    position,
+    options,
     contextMenuRef,
-    targetItem: contextMenu.targetItem,
   };
 };
