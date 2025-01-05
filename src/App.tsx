@@ -1,27 +1,34 @@
+// App.tsx
+import React from "react";
+import { useDispatch } from "react-redux";
+import { showContextMenu } from "./redux/slices/contextMenuSlice";
 import Taskbar from "./components/taskbar/Taskbar";
 import Apps from "./components/apps/Apps";
 import Calculator from "./components/apps/Calculator";
 import Settings from "./components/settings/Settings";
 import ContextMenu from "./components/context-menu/ContextMenu";
-import { useContextMenuLogicHook } from "./hooks/useContextMenuLogicHook";
 import useAppLogicHook from "./hooks/useAppLogicHook";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
 import DesktopItemsContainer from "./components/context-menu/DesktopItemsContainer";
-import React from "react";
 
 const App = () => {
+  const dispatch = useDispatch();
   const { constraintRef, showApp, openedApps, minimizedApps, wallpaper } =
     useAppLogicHook();
-  const { handleRightClick, contextMenu, contextMenuRef, closeContextMenu } =
-    useContextMenuLogicHook();
 
   return (
     <main
       onContextMenu={(e: React.MouseEvent) => {
-        handleRightClick(e, { name: "Desktop", type: "Desktop" });
+        e.preventDefault();
+        dispatch(
+          showContextMenu({
+            position: { x: e.clientX, y: e.clientY },
+            targetItem: { name: "Desktop", type: "Desktop" },
+          })
+        );
       }}
     >
-      <ScreenRenderer /> {/* Render the screen based on the state */}
+      <ScreenRenderer />
       {showApp && (
         <div ref={constraintRef} className="relative w-[100vw] h-[100vh]">
           <img
@@ -45,14 +52,7 @@ const App = () => {
           <Taskbar />
         </div>
       )}
-      {contextMenu.visible && (
-        <ContextMenu
-          closeContextMenu={closeContextMenu}
-          position={contextMenu.position}
-          contextMenuRef={contextMenuRef}
-          targetItem={contextMenu.targetItem}
-        />
-      )}
+      <ContextMenu />
     </main>
   );
 };

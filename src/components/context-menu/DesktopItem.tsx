@@ -32,6 +32,7 @@ const DesktopItem = ({
   return (
     <div
       onContextMenu={(e) => {
+        e.preventDefault();
         e.stopPropagation();
         handleRightClick(e, { name, type });
       }}

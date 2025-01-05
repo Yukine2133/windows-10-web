@@ -1,39 +1,30 @@
-import { useDispatch } from "react-redux";
+import { closeContextMenu } from "../../redux/slices/contextMenuSlice";
 import {
   getContextMenuItems,
   getContextMenuItemsDesktop,
 } from "../../utils/constants";
 import { DesktopItem } from "../../redux/slices/desktopItemsSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 
-interface ContextMenuProps {
-  position: { x: number; y: number };
-  contextMenuRef: React.RefObject<HTMLDivElement>;
-  closeContextMenu: () => void;
-  targetItem: { name: string; type: string } | null;
-}
+const ContextMenu = () => {
+  const dispatch = useAppDispatch();
+  const { visible, position, targetItem } = useAppSelector(
+    (state) => state.contextMenu
+  );
 
-const ContextMenu = ({
-  position,
-  contextMenuRef,
-  closeContextMenu,
-  targetItem,
-}: ContextMenuProps) => {
-  const dispatch = useDispatch();
-
-  if (!targetItem) return null;
+  if (!visible || !targetItem) return null;
 
   const options =
     targetItem.type === "Desktop"
-      ? getContextMenuItemsDesktop(dispatch, closeContextMenu)
+      ? getContextMenuItemsDesktop(dispatch, () => dispatch(closeContextMenu()))
       : getContextMenuItems(
           dispatch,
-          closeContextMenu,
+          () => dispatch(closeContextMenu()),
           targetItem as DesktopItem
         );
 
   return (
     <div
-      ref={contextMenuRef}
       className="absolute bg-[#2b2b2b] text-white rounded shadow-lg text-center text-sm"
       style={{
         top: position.y,
