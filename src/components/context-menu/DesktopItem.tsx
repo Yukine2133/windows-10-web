@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { renameItem } from "../../redux/slices/desktopItemsSlice";
+import { renameItem, setRename } from "../../redux/slices/desktopItemsSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 
 interface DesktopItemProps {
   name: string;
@@ -21,12 +21,14 @@ const DesktopItem = ({
   order,
 }: DesktopItemProps) => {
   const dispatch = useAppDispatch();
-  const [isRenaming, setIsRenaming] = useState(false);
+  const { renamingItem } = useAppSelector((state) => state.desktopItems);
   const [newName, setNewName] = useState(name);
 
   const handleRename = () => {
-    dispatch(renameItem({ order, newName }));
-    setIsRenaming(false);
+    if (newName.trim()) {
+      dispatch(renameItem({ order, newName }));
+    }
+    dispatch(setRename(null));
   };
 
   return (
@@ -44,14 +46,7 @@ const DesktopItem = ({
         alt="Item icon"
         className={`${type === "folder" ? "size-10" : "size-9"}`}
       />
-      <span
-        onDoubleClick={() => setIsRenaming(true)}
-        className="text-[11.5px] text-center  w-full"
-      >
-        {name}
-      </span>
-
-      {isRenaming && (
+      {renamingItem === name ? (
         <input
           type="text"
           value={newName}
@@ -59,8 +54,15 @@ const DesktopItem = ({
           onBlur={handleRename}
           onKeyDown={(e) => e.key === "Enter" && handleRename()}
           autoFocus
-          className="bg-transparent outline-none border border-gray-600 text-white text-center"
+          className="outline-none  z-50 bg-[#3c3c3c] rounded-sm transition-all duration-300  text-white text-center"
         />
+      ) : (
+        <span
+          onDoubleClick={() => dispatch(setRename(name))}
+          className="text-[11.5px] text-center break-words w-full"
+        >
+          {name}
+        </span>
       )}
     </div>
   );

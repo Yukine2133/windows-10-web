@@ -1,4 +1,3 @@
-// components/context-menu/DesktopItemsContainer.tsx
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { useDispatch } from "react-redux";
 import { showContextMenu } from "../../redux/slices/contextMenuSlice";

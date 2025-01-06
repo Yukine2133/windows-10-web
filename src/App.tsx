@@ -1,4 +1,3 @@
-// App.tsx
 import React from "react";
 import { useDispatch } from "react-redux";
 import { showContextMenu } from "./redux/slices/contextMenuSlice";

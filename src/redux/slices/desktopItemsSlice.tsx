@@ -8,17 +8,17 @@ export interface DesktopItem {
 
 interface DesktopItemsSliceState {
   items: DesktopItem[];
+  renamingItem: string | null;
 }
 
-// Load items from localStorage
 const loadFromLocalStorage = (): DesktopItem[] => {
   const storedItems = localStorage.getItem("desktopItems");
   return storedItems ? JSON.parse(storedItems) : [];
 };
 
-// Initial state
 const initialState: DesktopItemsSliceState = {
   items: loadFromLocalStorage(),
+  renamingItem: null,
 };
 
 const desktopItemsSlice = createSlice({
@@ -59,6 +59,9 @@ const desktopItemsSlice = createSlice({
       );
       localStorage.setItem("desktopItems", JSON.stringify(state.items));
     },
+    setRename: (state, action: PayloadAction<string | null>) => {
+      state.renamingItem = action.payload;
+    },
     renameItem: (
       state,
       action: PayloadAction<{ order: number; newName: string }>
@@ -69,6 +72,7 @@ const desktopItemsSlice = createSlice({
         item.name = newName;
         localStorage.setItem("desktopItems", JSON.stringify(state.items));
       }
+      state.renamingItem = null;
     },
   },
 });
@@ -79,5 +83,6 @@ export const {
   removeFolder,
   removeTextDocument,
   renameItem,
+  setRename,
 } = desktopItemsSlice.actions;
 export default desktopItemsSlice.reducer;

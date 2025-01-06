@@ -24,6 +24,7 @@ import {
   DesktopItem,
   removeFolder,
   removeTextDocument,
+  setRename,
 } from "../redux/slices/desktopItemsSlice";
 
 export const menuItems = [
@@ -136,21 +137,6 @@ export const settingItems = [
   },
 ];
 
-export const contextMenuItems = [
-  {
-    label: "Create Folder",
-    action: () => {
-      alert("ddsds");
-    },
-  },
-  {
-    label: "Create Text Document",
-    action: () => {
-      alert("ddsds");
-    },
-  },
-];
-
 export const getContextMenuItems = (
   dispatch: Dispatch<AnyAction>,
   closeContextMenu: () => void,
@@ -159,13 +145,7 @@ export const getContextMenuItems = (
   {
     label: "Rename",
     action: () => {
-      // Here, you can trigger a double-click event or show an input for renaming
-      const itemElement = document.querySelector(
-        `[data-order='${targetItem.order}']`
-      );
-      if (itemElement) {
-        itemElement.dispatchEvent(new Event("dblclick"));
-      }
+      dispatch(setRename(targetItem.name));
       closeContextMenu();
     },
   },
