@@ -14,7 +14,7 @@ const Taskbar = () => {
     if (minimizedApps.includes(name)) {
       dispatch(restoreApp(name));
     } else {
-      dispatch(minimizeApp(name));
+      dispatch(minimizeApp({ type: name }));
     }
   };
   return (

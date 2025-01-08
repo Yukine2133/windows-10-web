@@ -72,11 +72,16 @@ const appSlice = createSlice({
       );
     },
 
-    minimizeApp: (state, action: PayloadAction<string>) => {
-      if (!state.minimizedApps.includes(action.payload)) {
-        state.minimizedApps.push(action.payload);
+    minimizeApp: (
+      state,
+      action: PayloadAction<{ type: string; name?: string }>
+    ) => {
+      const appId = `${action.payload.type}-${action.payload.name}`;
+      if (!state.minimizedApps.includes(appId)) {
+        state.minimizedApps.push(appId);
       }
     },
+
     restoreApp: (state, action: PayloadAction<string>) => {
       state.minimizedApps = state.minimizedApps.filter(
         (app) => app !== action.payload

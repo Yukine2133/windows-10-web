@@ -1,6 +1,6 @@
+import { useAppSelector } from "../../hooks/reduxHooks";
 import TextDocument from "./TextDocument";
 import Calculator from "./Calculator";
-import { useAppSelector } from "../../hooks/reduxHooks";
 import Settings from "../settings/Settings";
 
 const OpenedApps = ({
@@ -13,21 +13,23 @@ const OpenedApps = ({
   return (
     <>
       {openedApps.map((app) => {
-        if (minimizedApps.includes(app.type)) return null;
+        const appId = `${app.type}-${app.name}`;
+
+        if (minimizedApps.includes(appId)) return null;
 
         switch (app.type) {
           case "TextDocument":
             return (
               <TextDocument
-                key={app.name}
+                key={appId}
                 constraintRef={constraintRef}
                 name={app.name || "Untitled Document"}
               />
             );
           case "Calculator":
-            return <Calculator key={app.type} constraintRef={constraintRef} />;
+            return <Calculator key={appId} constraintRef={constraintRef} />;
           case "Settings":
-            return <Settings constraintRef={constraintRef} />;
+            return <Settings key={appId} constraintRef={constraintRef} />;
           default:
             return null;
         }

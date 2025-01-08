@@ -41,7 +41,7 @@ const Settings = ({
             dispatch(closeApp({ type: "Settings" }));
           }}
           minimizeApp={() => {
-            dispatch(minimizeApp("Settings"));
+            dispatch(minimizeApp({ type: "Settings" }));
           }}
         />
       </div>

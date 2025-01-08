@@ -27,7 +27,9 @@ const TextDocument = ({
       <div className="flex justify-between items-center  border-b border-gray-700">
         <h3 className=" py-2 px-4">{name}</h3>
         <WindowControls
-          minimizeApp={() => dispatch(minimizeApp("TextDocument"))}
+          minimizeApp={() =>
+            dispatch(minimizeApp({ type: "TextDocument", name }))
+          }
           closeApp={() => dispatch(closeApp({ type: "TextDocument", name }))}
         />
       </div>

@@ -48,7 +48,7 @@ const StartMenu = () => {
     <div className="relative">
       <div
         onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
-        className="hover:bg-[#272727] transition-colors duration-100 h-full w-10 p-2"
+        className="hover:bg-[#272727]  transition-colors duration-100 h-full w-10 p-2"
       >
         <FaWindows className="w-5 h-6 group-hover:text-[#d157e2]" />
       </div>
@@ -59,7 +59,7 @@ const StartMenu = () => {
           exit="exit"
           variants={menuVariants}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="flex items-start gap-4 px-2 py-4 absolute bottom-full w-[40rem] h-[31.938em] bg-[#1f1f1f] shadow-lg"
+          className="flex items-start  gap-4 px-2 py-4 absolute bottom-full w-[40rem] h-[31.938em] bg-[#1f1f1f] shadow-lg"
         >
           <div className="flex flex-col justify-between h-full w-[150px]">
             <div className="flex items-center gap-2">

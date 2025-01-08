@@ -28,7 +28,7 @@ const Calculator = ({
       <div className="flex justify-between items-center">
         <h3 className=" py-2 px-4">Calculator</h3>
         <WindowControls
-          minimizeApp={() => dispatch(minimizeApp("Calculator"))}
+          minimizeApp={() => dispatch(minimizeApp({ type: "Calculator" }))}
           closeApp={() => dispatch(closeApp({ type: "Calculator" }))}
         />
       </div>
