@@ -1,12 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface OpenedApp {
+  type: string; // e.g., "TextDocument"
+  name?: string; // Name of the document or folder
+}
+
 interface AppState {
   showLoadingScreen: boolean;
   showRestartScreen: boolean;
   showShutDownScreen: boolean;
   showSleepScreen: boolean;
   showApp: boolean;
-  openedApps: string[];
+  openedApps: OpenedApp[];
   minimizedApps: string[];
 }
 
@@ -45,16 +50,28 @@ const appSlice = createSlice({
       state.showLoadingScreen = false;
       state.showApp = true;
     },
-    openApp: (state, action: PayloadAction<string>) => {
-      if (!state.openedApps.includes(action.payload)) {
+    openApp: (state, action: PayloadAction<OpenedApp>) => {
+      const existingApp = state.openedApps.find(
+        (app) =>
+          app.type === action.payload.type && app.name === action.payload.name
+      );
+
+      if (!existingApp) {
         state.openedApps.push(action.payload);
       }
     },
-    closeApp: (state, action: PayloadAction<string>) => {
+
+    closeApp: (
+      state,
+      action: PayloadAction<{ type: string; name?: string }>
+    ) => {
       state.openedApps = state.openedApps.filter(
-        (app) => app !== action.payload
+        (app) =>
+          app.type !== action.payload.type ||
+          (action.payload.name && app.name !== action.payload.name)
       );
     },
+
     minimizeApp: (state, action: PayloadAction<string>) => {
       if (!state.minimizedApps.includes(action.payload)) {
         state.minimizedApps.push(action.payload);

@@ -9,6 +9,7 @@ import ContextMenu from "./components/context-menu/ContextMenu";
 import useAppLogicHook from "./hooks/useAppLogicHook";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
 import DesktopItemsContainer from "./components/context-menu/DesktopItemsContainer";
+import TextDocument from "./components/apps/TextDocument";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,8 +40,8 @@ const App = () => {
             style={{ userSelect: "none" }}
           />
           <Apps />
-          <DesktopItemsContainer />
-          {openedApps.includes("Calculator") &&
+          {/* <DesktopItemsContainer /> */}
+          {/* {openedApps.includes("Calculator") &&
             !minimizedApps.includes("Calculator") && (
               <Calculator constraintRef={constraintRef} />
             )}
@@ -48,6 +49,31 @@ const App = () => {
             !minimizedApps.includes("Settings") && (
               <Settings constraintRef={constraintRef} />
             )}
+          {openedApps.includes("TextDocument") && (
+            <TextDocument constraintRef={constraintRef} />
+          )} */}
+          {openedApps.map((app) => {
+            if (app.type === "TextDocument") {
+              return (
+                !minimizedApps.includes(app.type) && (
+                  <TextDocument
+                    key={app.name}
+                    constraintRef={constraintRef}
+                    name={app.name || "Untitled Document"}
+                  />
+                )
+              );
+            }
+            if (app.type === "Calculator") {
+              return (
+                !minimizedApps.includes(app.type) && (
+                  <Calculator constraintRef={constraintRef} />
+                )
+              );
+            }
+            return null;
+          })}
+
           <Taskbar />
         </div>
       )}

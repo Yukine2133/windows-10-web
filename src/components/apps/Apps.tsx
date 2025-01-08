@@ -9,7 +9,7 @@ const Apps = () => {
     if (minimizedApps.includes(name)) {
       dispatch(restoreApp(name));
     } else {
-      dispatch(openApp(name));
+      dispatch(openApp({ type: name }));
     }
   };
 

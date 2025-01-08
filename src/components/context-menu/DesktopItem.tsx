@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { renameItem, setRename } from "../../redux/slices/desktopItemsSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { openApp } from "../../redux/slices/appSlice";
 
 interface DesktopItemProps {
   name: string;
@@ -31,6 +32,12 @@ const DesktopItem = ({
     dispatch(setRename(null));
   };
 
+  const onClick = (type: string, name: string) => {
+    if (type === "textDocument") {
+      dispatch(openApp({ type: "TextDocument", name }));
+    }
+  };
+
   return (
     <div
       onContextMenu={(e) => {
@@ -40,6 +47,7 @@ const DesktopItem = ({
       }}
       className="first:ml-16 flex flex-col  items-center text-white cursor-pointer"
       style={{ width: "70px" }}
+      onClick={() => onClick(type, name)}
     >
       <img
         src={icon}
