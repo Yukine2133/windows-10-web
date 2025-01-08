@@ -29,7 +29,7 @@ const Calculator = ({
         <h3 className=" py-2 px-4">Calculator</h3>
         <WindowControls
           minimizeApp={() => dispatch(minimizeApp("Calculator"))}
-          closeApp={() => dispatch(closeApp("Calculator"))}
+          closeApp={() => dispatch(closeApp({ type: "Calculator" }))}
         />
       </div>
 

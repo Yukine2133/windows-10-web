@@ -32,13 +32,13 @@ const Settings = ({
       drag={isDragging}
       dragConstraints={constraintRef}
       dragMomentum={false}
-      className="absolute bg-black text-white top-[100px] left-[18%] w-[75rem] overflow-y-auto h-[80%] scrollbar-hidden"
+      className="absolute bg-black z-10 text-white top-[100px] left-[18%] w-[75rem] overflow-y-auto h-[80%] scrollbar-hidden"
     >
       <div className="flex items-center justify-between">
         <h3 className="px-4 text-sm">Settings</h3>
         <WindowControls
           closeApp={() => {
-            dispatch(closeApp("Settings"));
+            dispatch(closeApp({ type: "Settings" }));
           }}
           minimizeApp={() => {
             dispatch(minimizeApp("Settings"));

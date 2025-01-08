@@ -23,28 +23,55 @@ const Taskbar = () => {
       <div className="flex items-center gap-2">
         <StartMenu />
         {/* Apps */}
-        {openedApps.includes("Calculator") && (
-          <div
-            onClick={() => toggleApp("Calculator")}
-            className={`${
-              !minimizedApps.includes("Calculator") &&
-              "bg-[#272727] p-2 hover:bg-[#474747] transition-colors duration-200"
-            } p-2`}
-          >
-            <img src="calculator.png" alt="Calculator" className="size-6" />
-          </div>
-        )}
-        {openedApps.includes("Settings") && (
-          <div
-            onClick={() => toggleApp("Settings")}
-            className={`${
-              !minimizedApps.includes("Settings") &&
-              "bg-[#272727] p-2 hover:bg-[#474747] transition-colors duration-200"
-            } p-2`}
-          >
-            <AiOutlineSetting className="size-6" />
-          </div>
-        )}
+
+        {openedApps.map((app) => {
+          switch (app.type) {
+            case "Calculator":
+              return (
+                <div
+                  onClick={() => toggleApp("Calculator")}
+                  className={`${
+                    !minimizedApps.includes("Calculator") &&
+                    "bg-[#272727] p-2 hover:bg-[#474747] transition-colors duration-200"
+                  } p-2`}
+                >
+                  <img
+                    src="calculator.png"
+                    alt="Calculator"
+                    className="size-6"
+                  />
+                </div>
+              );
+            case "Settings":
+              return (
+                <div
+                  onClick={() => toggleApp("Settings")}
+                  className={`${
+                    !minimizedApps.includes("Settings") &&
+                    "bg-[#272727] p-2 hover:bg-[#474747] transition-colors duration-200"
+                  } p-2`}
+                >
+                  <AiOutlineSetting className="size-6" />
+                </div>
+              );
+            case "TextDocument":
+              return (
+                <div
+                  onClick={() => toggleApp("TextDocument")}
+                  className={`${
+                    !minimizedApps.includes("TextDocument") &&
+                    "bg-[#272727] p-2 hover:bg-[#474747] transition-colors duration-200"
+                  } p-2`}
+                >
+                  <img
+                    src="text-document.png"
+                    alt="Text Document"
+                    className="size-6"
+                  />
+                </div>
+              );
+          }
+        })}
       </div>
 
       <div className="select-none  flex  h-full  items-center">

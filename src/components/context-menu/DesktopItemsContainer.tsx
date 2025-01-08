@@ -10,7 +10,7 @@ const DesktopItemsContainer = () => {
   const sortedItems = [...items].sort((a, b) => a.order - b.order);
 
   return (
-    <div className="relative p-2 h-full w-full">
+    <div className="relative p-2 ">
       <div className="flex flex-wrap items-start gap-2">
         {sortedItems.map((item, index) => (
           <DesktopItem

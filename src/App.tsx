@@ -3,18 +3,15 @@ import { useDispatch } from "react-redux";
 import { showContextMenu } from "./redux/slices/contextMenuSlice";
 import Taskbar from "./components/taskbar/Taskbar";
 import Apps from "./components/apps/Apps";
-import Calculator from "./components/apps/Calculator";
-import Settings from "./components/settings/Settings";
 import ContextMenu from "./components/context-menu/ContextMenu";
 import useAppLogicHook from "./hooks/useAppLogicHook";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
 import DesktopItemsContainer from "./components/context-menu/DesktopItemsContainer";
-import TextDocument from "./components/apps/TextDocument";
+import OpenedApps from "./components/apps/OpenedApps";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { constraintRef, showApp, openedApps, minimizedApps, wallpaper } =
-    useAppLogicHook();
+  const { constraintRef, showApp, wallpaper } = useAppLogicHook();
 
   return (
     <main
@@ -40,40 +37,8 @@ const App = () => {
             style={{ userSelect: "none" }}
           />
           <Apps />
-          {/* <DesktopItemsContainer /> */}
-          {/* {openedApps.includes("Calculator") &&
-            !minimizedApps.includes("Calculator") && (
-              <Calculator constraintRef={constraintRef} />
-            )}
-          {openedApps.includes("Settings") &&
-            !minimizedApps.includes("Settings") && (
-              <Settings constraintRef={constraintRef} />
-            )}
-          {openedApps.includes("TextDocument") && (
-            <TextDocument constraintRef={constraintRef} />
-          )} */}
-          {openedApps.map((app) => {
-            if (app.type === "TextDocument") {
-              return (
-                !minimizedApps.includes(app.type) && (
-                  <TextDocument
-                    key={app.name}
-                    constraintRef={constraintRef}
-                    name={app.name || "Untitled Document"}
-                  />
-                )
-              );
-            }
-            if (app.type === "Calculator") {
-              return (
-                !minimizedApps.includes(app.type) && (
-                  <Calculator constraintRef={constraintRef} />
-                )
-              );
-            }
-            return null;
-          })}
-
+          <OpenedApps constraintRef={constraintRef} />
+          <DesktopItemsContainer />
           <Taskbar />
         </div>
       )}
