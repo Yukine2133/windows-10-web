@@ -1,10 +1,4 @@
-import { useState } from "react";
-import {
-  renameDesktopItem,
-  setRename,
-} from "../../redux/slices/desktopItemsSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { openApp } from "../../redux/slices/appSlice";
+import useDesktopItemLogicHook from "../../hooks/useDesktopItemLogicHook";
 
 interface DesktopItemProps {
   name: string;
@@ -24,29 +18,8 @@ const DesktopItem = ({
   handleRightClick,
   order,
 }: DesktopItemProps) => {
-  const dispatch = useAppDispatch();
-  const { renamingItem } = useAppSelector((state) => state.desktopItems);
-  const [newName, setNewName] = useState(name);
-
-  const handleRename = () => {
-    if (newName.trim()) {
-      dispatch(
-        renameDesktopItem({
-          order,
-          oldName: name,
-          newName,
-        })
-      );
-    }
-    dispatch(setRename(null));
-  };
-
-  const onClick = (type: string, name: string) => {
-    if (type === "textDocument") {
-      dispatch(openApp({ type: "TextDocument", name }));
-    }
-  };
-
+  const { handleRename, newName, onClick, setNewName, renamingItem } =
+    useDesktopItemLogicHook({ order, name });
   return (
     <div
       onContextMenu={(e) => {
@@ -74,10 +47,7 @@ const DesktopItem = ({
           className="outline-none  z-50 bg-[#3c3c3c] rounded-sm transition-all duration-300  text-white text-center"
         />
       ) : (
-        <span
-          onDoubleClick={() => dispatch(setRename(name))}
-          className="text-[11.5px] text-center break-words w-full"
-        >
+        <span className="text-[11.5px] text-center break-words w-full">
           {name}
         </span>
       )}
