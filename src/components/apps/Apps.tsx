@@ -14,7 +14,7 @@ const Apps = () => {
   };
 
   return (
-    <div className="absolute text-white p-2">
+    <div className="absolute z-10 text-white p-2">
       <div
         onClick={() => toggleApp("Calculator")}
         className="flex flex-col justify-center items-center cursor-pointer"

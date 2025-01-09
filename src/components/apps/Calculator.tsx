@@ -23,7 +23,7 @@ const Calculator = ({
       drag
       dragConstraints={constraintRef}
       dragMomentum={false}
-      className="absolute w-[20rem] text-white bg-[#202020] left-[42%] top-[21%] "
+      className="absolute z-10 w-[20rem] text-white bg-[#202020] left-[calc(73%-30rem)] top-[6rem] "
     >
       <div className="flex justify-between items-center">
         <h3 className=" py-2 px-4">Calculator</h3>
