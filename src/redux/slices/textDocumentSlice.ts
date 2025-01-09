@@ -36,9 +36,24 @@ const textDocumentsSlice = createSlice({
       state.documents = remainingDocuments;
       localStorage.setItem("textDocuments", JSON.stringify(state.documents));
     },
+    renameTextDocument: (
+      state,
+      action: PayloadAction<{ oldName: string; newName: string }>
+    ) => {
+      const { oldName, newName } = action.payload;
+      const existingDocument = state.documents[oldName];
+      if (existingDocument) {
+        state.documents[newName] = {
+          name: newName,
+          content: existingDocument.content,
+        };
+        delete state.documents[oldName];
+        localStorage.setItem("textDocuments", JSON.stringify(state.documents));
+      }
+    },
   },
 });
 
-export const { saveTextDocument, deleteTextDocument } =
+export const { saveTextDocument, deleteTextDocument, renameTextDocument } =
   textDocumentsSlice.actions;
 export default textDocumentsSlice.reducer;

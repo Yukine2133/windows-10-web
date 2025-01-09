@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { renameItem, setRename } from "../../redux/slices/desktopItemsSlice";
+import {
+  renameDesktopItem,
+  setRename,
+} from "../../redux/slices/desktopItemsSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { openApp } from "../../redux/slices/appSlice";
 
@@ -27,7 +30,13 @@ const DesktopItem = ({
 
   const handleRename = () => {
     if (newName.trim()) {
-      dispatch(renameItem({ order, newName }));
+      dispatch(
+        renameDesktopItem({
+          order,
+          oldName: name,
+          newName,
+        })
+      );
     }
     dispatch(setRename(null));
   };

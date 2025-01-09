@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { renameTextDocument } from "./textDocumentSlice";
 
 export interface DesktopItem {
   name: string;
@@ -15,6 +16,24 @@ const loadFromLocalStorage = (): DesktopItem[] => {
   const storedItems = localStorage.getItem("desktopItems");
   return storedItems ? JSON.parse(storedItems) : [];
 };
+
+export const renameDesktopItem = createAsyncThunk(
+  "desktopItems/renameDesktopItem",
+  async (
+    {
+      order,
+      oldName,
+      newName,
+    }: { order: number; oldName: string; newName: string },
+    { dispatch }
+  ) => {
+    dispatch(renameItem({ order, newName }));
+
+    if (oldName !== newName) {
+      dispatch(renameTextDocument({ oldName, newName }));
+    }
+  }
+);
 
 const initialState: DesktopItemsSliceState = {
   items: loadFromLocalStorage(),
