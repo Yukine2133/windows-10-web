@@ -3,6 +3,7 @@ import appReducer from "./../slices/appSlice";
 import settingsReducer from "./../slices/settingsSlice";
 import desktopItemsReducer from "../slices/desktopItemsSlice";
 import contextMenuReducer from "../slices/contextMenuSlice";
+import textDocumentReducer from "../slices/textDocumentSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     settings: settingsReducer,
     desktopItems: desktopItemsReducer,
     contextMenu: contextMenuReducer,
+    textDocument: textDocumentReducer,
   },
 });
 
