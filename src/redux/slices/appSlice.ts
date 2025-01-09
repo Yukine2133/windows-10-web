@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface OpenedApp {
-  type: string; // e.g., "TextDocument"
-  name?: string; // Name of the document or folder
+  type: string;
+  name?: string;
 }
 
 interface AppState {
