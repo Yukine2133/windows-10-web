@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useCalculatorLogicHook = () => {
   const [display, setDisplay] = useState("0");
@@ -21,6 +21,7 @@ const useCalculatorLogicHook = () => {
     );
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleClick = (value: string) => {
     if (!isNaN(Number(value))) {
       if (waitingForOperand) {
@@ -85,6 +86,29 @@ const useCalculatorLogicHook = () => {
         return secondOperand;
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const key = event.key;
+
+      if (
+        !isNaN(Number(key)) ||
+        ["+", "-", "*", "/", "=", "Enter"].includes(key)
+      ) {
+        handleClick(key === "Enter" ? "=" : key);
+      } else if (key === "Backspace") {
+        handleClick("⌫");
+      } else if (key.toLowerCase() === "c") {
+        handleClick("C");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleClick]);
 
   return {
     handleClick,
