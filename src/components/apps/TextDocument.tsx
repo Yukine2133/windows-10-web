@@ -1,6 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { useState, useEffect } from "react";
-import { saveTextDocument } from "../../redux/slices/textDocumentSlice";
+import useTextDocumentLogicHook from "../../hooks/useTextDocumentLogicHook";
 import AppWindow from "./AppWindow";
 
 const TextDocument = ({
@@ -10,21 +8,8 @@ const TextDocument = ({
   constraintRef: React.MutableRefObject<null>;
   name: string;
 }) => {
-  const dispatch = useAppDispatch();
-  const documentContent = useAppSelector(
-    (state) => state.textDocument.documents[name]?.content || ""
-  );
-
-  const [content, setContent] = useState(documentContent);
-  const [isDragging, setIsDragging] = useState(true);
-
-  useEffect(() => {
-    setContent(documentContent);
-  }, [documentContent]);
-
-  const saveContent = () => {
-    dispatch(saveTextDocument({ name, content }));
-  };
+  const { isDragging, setIsDragging, saveContent, setContent, content } =
+    useTextDocumentLogicHook({ name });
 
   return (
     <AppWindow
