@@ -1,10 +1,6 @@
-import { motion } from "framer-motion";
-
-import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
 import { calculatorButtons } from "../../utils/constants";
 import useCalculatorLogicHook from "../../hooks/useCalculatorLogicHook";
-import WindowControls from "../WindowControls";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import AppWindow from "./AppWindow";
 
 const Calculator = ({
   constraintRef,
@@ -13,28 +9,20 @@ const Calculator = ({
 }) => {
   const { history, handleClick, display } = useCalculatorLogicHook();
 
-  const dispatch = useAppDispatch();
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      drag
-      dragConstraints={constraintRef}
-      dragMomentum={false}
-      className="absolute z-10 w-[20rem] text-white bg-[#202020] left-[calc(73%-30rem)] top-[6rem] "
+    <AppWindow
+      title="Calculator"
+      type="Calculator"
+      constraintRef={constraintRef}
+      className="left-[calc(73%-30rem)] top-[6rem] w-[20rem]"
     >
-      <div className="flex justify-between items-center">
-        <h3 className=" py-2 px-4">Calculator</h3>
-        <WindowControls
-          minimizeApp={() => dispatch(minimizeApp({ type: "Calculator" }))}
-          closeApp={() => dispatch(closeApp({ type: "Calculator" }))}
-        />
-      </div>
-
       <div className="text-right px-4  text-gray-400">{history}</div>
-      <div className="text-right px-4 py-2 text-3xl text-white">{display}</div>
+      <div
+        className="text-right px-4 py-2 text-3xl text-white  "
+        style={{ overflowWrap: "anywhere" }}
+      >
+        {display}
+      </div>
 
       <div className="grid grid-cols-4 gap-1 p-4">
         {calculatorButtons.flat().map((button) => (
@@ -47,7 +35,7 @@ const Calculator = ({
           </button>
         ))}
       </div>
-    </motion.div>
+    </AppWindow>
   );
 };
 

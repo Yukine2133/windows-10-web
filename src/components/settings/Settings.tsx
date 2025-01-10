@@ -1,11 +1,10 @@
-import { motion } from "framer-motion";
 import { settingItems } from "../../utils/constants";
-import WindowControls from "../WindowControls";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
 import { setPersonalization } from "../../redux/slices/settingsSlice";
 import { useState } from "react";
 import Personalization from "./Personalization";
+import AppWindow from "../apps/AppWindow";
+import SettingItem from "./SettingItem";
 
 const Settings = ({
   constraintRef,
@@ -25,27 +24,14 @@ const Settings = ({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+    <AppWindow
+      title="Settings"
       drag={isDragging}
-      dragConstraints={constraintRef}
-      dragMomentum={false}
-      className="absolute bg-black z-10 text-white top-[3.125rem] left-[calc(42%-30rem)]  w-[75rem] overflow-y-auto h-[80%] scrollbar-hidden"
+      isDragging={isDragging}
+      type="Settings"
+      constraintRef={constraintRef}
+      className=" bg-black z-10  top-[3.125rem] left-[calc(42%-30rem)]  w-[75rem] overflow-y-auto h-[80%] scrollbar-hidden"
     >
-      <div className="flex items-center justify-between">
-        <h3 className="px-4 text-sm">Settings</h3>
-        <WindowControls
-          closeApp={() => {
-            dispatch(closeApp({ type: "Settings" }));
-          }}
-          minimizeApp={() => {
-            dispatch(minimizeApp({ type: "Settings" }));
-          }}
-        />
-      </div>
-
       {isPersonalizationOpen ? (
         <Personalization setIsDragging={setIsDragging} />
       ) : (
@@ -56,23 +42,19 @@ const Settings = ({
             {settingItems.map((setting) => {
               const { desc, Icon, label, id } = setting;
               return (
-                <div
-                  onClick={() => handleClick(label)}
+                <SettingItem
+                  desc={desc}
+                  handleClick={handleClick}
                   key={id}
-                  className="flex items-center gap-4 outline outline-1 outline-transparent hover:outline-[#191919] transition-colors duration-200 p-4"
-                >
-                  <Icon className="size-7 text-[#731380]" />
-                  <div className="flex flex-col gap-2">
-                    <h4 className="text-sm">{label}</h4>
-                    <h4 className="text-xs text-[#838383]">{desc}</h4>
-                  </div>
-                </div>
+                  label={label}
+                  Icon={Icon}
+                />
               );
             })}
           </section>
         </>
       )}
-    </motion.div>
+    </AppWindow>
   );
 };
 

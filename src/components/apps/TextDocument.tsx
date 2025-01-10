@@ -1,9 +1,7 @@
-import { motion } from "framer-motion";
-import WindowControls from "../WindowControls";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
 import { useState, useEffect } from "react";
 import { saveTextDocument } from "../../redux/slices/textDocumentSlice";
+import AppWindow from "./AppWindow";
 
 const TextDocument = ({
   constraintRef,
@@ -29,28 +27,16 @@ const TextDocument = ({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+    <AppWindow
+      saveContent={saveContent}
+      title={name}
+      type="TextDocument"
       drag={isDragging}
-      dragConstraints={constraintRef}
-      dragMomentum={false}
-      className={`absolute w-[60rem] z-10 h-[20rem] text-white bg-[#202020] left-[calc(50%-30rem)] top-[21%]`}
+      isDragging={isDragging}
+      constraintRef={constraintRef}
+      className=" w-[60rem] h-[20rem]  left-[calc(50%-30rem)] top-[21%]"
+      windowControlsClassName="border-b border-gray-700"
     >
-      <div className="flex justify-between items-center border-b border-gray-700">
-        <h3 className="py-2 px-4">{name}</h3>
-        <WindowControls
-          minimizeApp={() =>
-            dispatch(minimizeApp({ type: "TextDocument", name }))
-          }
-          closeApp={() => {
-            saveContent();
-            dispatch(closeApp({ type: "TextDocument", name }));
-          }}
-        />
-      </div>
-
       <div>
         <textarea
           onMouseEnter={() => setIsDragging(false)}
@@ -62,7 +48,7 @@ const TextDocument = ({
           autoFocus
         />
       </div>
-    </motion.div>
+    </AppWindow>
   );
 };
 
