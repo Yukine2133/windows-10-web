@@ -1,27 +1,17 @@
 import { settingItems } from "../../utils/constants";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { setPersonalization } from "../../redux/slices/settingsSlice";
-import { useState } from "react";
+
 import Personalization from "./Personalization";
 import AppWindow from "../apps/AppWindow";
 import SettingItem from "./SettingItem";
+import useSettingsLogicHook from "../../hooks/useSettingsLogicHook";
 
 const Settings = ({
   constraintRef,
 }: {
   constraintRef: React.MutableRefObject<null>;
 }) => {
-  const dispatch = useAppDispatch();
-
-  const [isDragging, setIsDragging] = useState(true);
-
-  const { isPersonalizationOpen } = useAppSelector((state) => state.settings);
-
-  const handleClick = (label: string) => {
-    if (label === "Personalization") {
-      dispatch(setPersonalization(true));
-    }
-  };
+  const { isDragging, setIsDragging, isPersonalizationOpen, handleClick } =
+    useSettingsLogicHook();
 
   return (
     <AppWindow
