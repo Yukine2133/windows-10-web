@@ -43,8 +43,9 @@ const DesktopItem = ({
           onChange={(e) => setNewName(e.target.value)}
           onBlur={handleRename}
           onKeyDown={(e) => e.key === "Enter" && handleRename()}
+          onClick={(e) => e.stopPropagation()}
           autoFocus
-          className="outline-none  z-50 bg-[#3c3c3c] rounded-sm transition-all duration-300  text-white text-center"
+          className="outline-none mt-1  z-50 bg-[#3c3c3c] rounded-sm transition-all duration-300  text-white text-center"
         />
       ) : (
         <span className="text-[11.5px] text-center break-words w-full">
