@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { minimizeApp, restoreApp } from "../../redux/slices/appSlice";
 import { AiOutlineSetting } from "react-icons/ai";
+import TaskbarApp from "./TaskbarApp";
 
 const TaskbarApps = () => {
   const dispatch = useAppDispatch();
@@ -23,46 +24,35 @@ const TaskbarApps = () => {
         switch (app.type) {
           case "Calculator":
             return (
-              <div
+              <TaskbarApp
                 key={appId}
-                onClick={() => toggleApp(app.type, app.name)}
-                className={`p-2 ${
-                  !isMinimized &&
-                  "bg-[#272727] hover:bg-[#474747] transition-colors duration-200"
-                }`}
-              >
-                <img src="calculator.png" alt="Calculator" className="size-6" />
-              </div>
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="calculator.png"
+                alt="Calculator"
+              />
             );
           case "Settings":
             return (
-              <div
+              <TaskbarApp
                 key={appId}
-                onClick={() => toggleApp(app.type, app.name)}
-                className={`p-2 ${
-                  !isMinimized &&
-                  "bg-[#272727] hover:bg-[#474747] transition-colors duration-200"
-                }`}
-              >
-                <AiOutlineSetting className="size-6" />
-              </div>
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                Icon={AiOutlineSetting}
+              />
             );
           case "TextDocument":
             return (
-              <div
+              <TaskbarApp
                 key={appId}
-                onClick={() => toggleApp(app.type, app.name)}
-                className={`p-2 ${
-                  !isMinimized &&
-                  "bg-[#272727] hover:bg-[#474747] transition-colors duration-200"
-                }`}
-              >
-                <img
-                  src="text-document.png"
-                  alt="Text Document"
-                  className="size-6"
-                />
-              </div>
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="text-document.png"
+                alt="Text Document"
+              />
             );
           default:
             return null;
