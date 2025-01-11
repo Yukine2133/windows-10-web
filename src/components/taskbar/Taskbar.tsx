@@ -7,7 +7,7 @@ import TaskbarApps from "./TaskbarApps";
 
 const Taskbar = () => {
   return (
-    <div className="flex text-white items-center fixed w-full h-10 bottom-0 left-0 justify-between bg-[#101010]">
+    <div className="flex z-20 text-white items-center fixed w-full h-10 bottom-0 left-0 justify-between bg-[#101010]">
       <div className="flex items-center gap-2">
         <StartMenu />
 

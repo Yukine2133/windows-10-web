@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import WindowControls from "../WindowControls";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
+import { ChromeTab } from "./Chrome";
 
 interface AppWindowProps {
   title: string;
@@ -40,7 +41,11 @@ const AppWindow = ({
       <div
         className={`flex justify-between items-center ${windowControlsClassName}`}
       >
-        <h3 className="py-2 px-4">{title}</h3>
+        {type === "Chrome" ? (
+          <ChromeTab />
+        ) : (
+          <h3 className="py-2 px-4">{title}</h3>
+        )}
         <WindowControls
           closeApp={() => {
             dispatch(closeApp({ type }));
