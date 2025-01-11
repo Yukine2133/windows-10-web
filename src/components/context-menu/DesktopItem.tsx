@@ -27,7 +27,7 @@ const DesktopItem = ({
         e.stopPropagation();
         handleRightClick(e, { name, type });
       }}
-      className="first:ml-16 flex flex-col  items-center text-white cursor-pointer"
+      className="first:ml-[164px] flex flex-col  items-center text-white cursor-pointer"
       style={{ width: "70px" }}
       onClick={() => onClick(type, name)}
     >

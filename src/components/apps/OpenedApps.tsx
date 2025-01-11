@@ -2,6 +2,7 @@ import { useAppSelector } from "../../hooks/reduxHooks";
 import TextDocument from "./TextDocument";
 import Calculator from "./Calculator";
 import Settings from "../settings/Settings";
+import Chrome from "./Chrome";
 
 const OpenedApps = ({
   constraintRef,
@@ -30,6 +31,8 @@ const OpenedApps = ({
             return <Calculator key={appId} constraintRef={constraintRef} />;
           case "Settings":
             return <Settings key={appId} constraintRef={constraintRef} />;
+          case "Chrome":
+            return <Chrome key={appId} constraintRef={constraintRef} />;
           default:
             return null;
         }
