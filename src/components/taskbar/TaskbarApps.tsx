@@ -54,6 +54,17 @@ const TaskbarApps = () => {
                 alt="Text Document"
               />
             );
+          case "Chrome":
+            return (
+              <TaskbarApp
+                key={appId}
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="chrome.png"
+                alt="Chrome"
+              />
+            );
           default:
             return null;
         }
