@@ -36,8 +36,10 @@ const App = () => {
             onError={() => console.log("Error loading wallpaper")}
             style={{ userSelect: "none" }}
           />
-          <Apps />
-          <DesktopItemsContainer />
+          <div className="flex">
+            <Apps />
+            <DesktopItemsContainer />
+          </div>
           <OpenedApps constraintRef={constraintRef} />
           <Taskbar />
         </div>

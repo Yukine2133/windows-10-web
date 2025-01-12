@@ -14,8 +14,8 @@ const Apps = () => {
   };
 
   return (
-    <div className="relative  bg-red-500 h-min ">
-      <div className="  flex  items-center z-10 gap-2 text-white p-2">
+    <div className="relative    ">
+      <div className="flex flex-col  items-center z-10 gap-2 text-white pt-2 px-1">
         <div
           onClick={() => toggleApp("Calculator")}
           className="flex flex-col justify-center items-center cursor-pointer"
@@ -29,7 +29,6 @@ const Apps = () => {
           />
           <h2 className="text-[13px]">Calculator</h2>
         </div>
-
         <div
           onClick={() => toggleApp("Chrome")}
           className="flex flex-col justify-center items-center cursor-pointer"
@@ -41,7 +40,7 @@ const Apps = () => {
             alt="Chrome Icon"
             className="size-10"
           />
-          <h2 className="text-[13px]">Google Chrome</h2>
+          <h2 className="text-[13px] text-center">Google Chrome</h2>
         </div>
         <div
           onClick={() => toggleApp("Solitaire")}
