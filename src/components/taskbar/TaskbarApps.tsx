@@ -65,6 +65,17 @@ const TaskbarApps = () => {
                 alt="Chrome"
               />
             );
+          case "Solitaire":
+            return (
+              <TaskbarApp
+                key={appId}
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="solitaire.png"
+                alt="Solitaire"
+              />
+            );
           default:
             return null;
         }
