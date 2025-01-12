@@ -27,14 +27,14 @@ const DesktopItem = ({
         e.stopPropagation();
         handleRightClick(e, { name, type });
       }}
-      className="first:ml-[164px] flex flex-col  items-center text-white cursor-pointer"
+      className=" flex flex-col  items-center text-white cursor-pointer"
       style={{ width: "70px" }}
       onClick={() => onClick(type, name)}
     >
       <img
         src={icon}
         alt="Item icon"
-        className={`${type === "folder" ? "size-10" : "size-9"}`}
+        className={`${type === "folder" ? "size-10" : "size-[34px]"}`}
       />
       {renamingItem === name ? (
         <input

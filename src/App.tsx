@@ -37,8 +37,8 @@ const App = () => {
             style={{ userSelect: "none" }}
           />
           <Apps />
-          <OpenedApps constraintRef={constraintRef} />
           <DesktopItemsContainer />
+          <OpenedApps constraintRef={constraintRef} />
           <Taskbar />
         </div>
       )}

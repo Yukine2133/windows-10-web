@@ -14,33 +14,48 @@ const Apps = () => {
   };
 
   return (
-    <div className="absolute flex justify-center items-center z-10 gap-2 text-white p-2">
-      <div
-        onClick={() => toggleApp("Calculator")}
-        className="flex   flex-col justify-center items-center cursor-pointer"
-      >
-        <img
-          style={{ userSelect: "none" }}
-          draggable="false"
-          src="calculator.png"
-          alt="Calculator Icon"
-          className="size-9"
-        />
-        <h2 className="text-[13px]">Calculator</h2>
-      </div>
+    <div className="relative  bg-red-500 h-min ">
+      <div className="  flex  items-center z-10 gap-2 text-white p-2">
+        <div
+          onClick={() => toggleApp("Calculator")}
+          className="flex flex-col justify-center items-center cursor-pointer"
+        >
+          <img
+            style={{ userSelect: "none" }}
+            draggable="false"
+            src="calculator.png"
+            alt="Calculator Icon"
+            className="size-9"
+          />
+          <h2 className="text-[13px]">Calculator</h2>
+        </div>
 
-      <div
-        onClick={() => toggleApp("Chrome")}
-        className="flex flex-col justify-center items-center cursor-pointer  "
-      >
-        <img
-          style={{ userSelect: "none" }}
-          draggable="false"
-          src="chrome.png"
-          alt="Chrome Icon"
-          className="size-9"
-        />
-        <h2 className="text-[13px] ">Google Chrome</h2>
+        <div
+          onClick={() => toggleApp("Chrome")}
+          className="flex flex-col justify-center items-center cursor-pointer"
+        >
+          <img
+            style={{ userSelect: "none" }}
+            draggable="false"
+            src="chrome.png"
+            alt="Chrome Icon"
+            className="size-10"
+          />
+          <h2 className="text-[13px]">Google Chrome</h2>
+        </div>
+        <div
+          onClick={() => toggleApp("Solitaire")}
+          className="flex flex-col justify-center items-center cursor-pointer"
+        >
+          <img
+            style={{ userSelect: "none" }}
+            draggable="false"
+            src="solitaire.png"
+            alt="Solitaire Icon"
+            className="size-10"
+          />
+          <h2 className="text-[13px]">Solitaire</h2>
+        </div>
       </div>
     </div>
   );
