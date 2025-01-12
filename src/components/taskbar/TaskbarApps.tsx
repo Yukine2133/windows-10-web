@@ -76,6 +76,17 @@ const TaskbarApps = () => {
                 alt="Solitaire"
               />
             );
+          case "Youtube":
+            return (
+              <TaskbarApp
+                key={appId}
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="youtube.png"
+                alt="Youtube"
+              />
+            );
           default:
             return null;
         }

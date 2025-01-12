@@ -4,6 +4,7 @@ import Calculator from "./Calculator";
 import Settings from "../settings/Settings";
 import Chrome from "./Chrome";
 import Solitaire from "./Solitaire";
+import Youtube from "./Youtube";
 
 const OpenedApps = ({
   constraintRef,
@@ -36,6 +37,8 @@ const OpenedApps = ({
             return <Chrome key={appId} constraintRef={constraintRef} />;
           case "Solitaire":
             return <Solitaire key={appId} constraintRef={constraintRef} />;
+          case "Youtube":
+            return <Youtube key={appId} constraintRef={constraintRef} />;
           default:
             return null;
         }
