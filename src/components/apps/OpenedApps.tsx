@@ -5,6 +5,7 @@ import Settings from "../settings/Settings";
 import Chrome from "./Chrome";
 import Solitaire from "./Solitaire";
 import Youtube from "./Youtube";
+import Spotify from "./Spotify";
 
 const OpenedApps = ({
   constraintRef,
@@ -39,6 +40,8 @@ const OpenedApps = ({
             return <Solitaire key={appId} constraintRef={constraintRef} />;
           case "Youtube":
             return <Youtube key={appId} constraintRef={constraintRef} />;
+          case "Spotify":
+            return <Spotify key={appId} constraintRef={constraintRef} />;
           default:
             return null;
         }

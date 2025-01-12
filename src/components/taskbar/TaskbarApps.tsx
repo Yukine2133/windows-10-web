@@ -87,6 +87,17 @@ const TaskbarApps = () => {
                 alt="Youtube"
               />
             );
+          case "Spotify":
+            return (
+              <TaskbarApp
+                key={appId}
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="spotify.png"
+                alt="Spotify"
+              />
+            );
           default:
             return null;
         }

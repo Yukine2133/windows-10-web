@@ -43,7 +43,9 @@ const Apps = () => {
             alt="Chrome Icon"
             className="size-10"
           />
-          <h2 className="text-[13px] text-center">Google Chrome</h2>
+          <h2 className="text-[13px] text-center">
+            Google <br /> Chrome
+          </h2>
         </div>
 
         {/* Solitaire */}
@@ -74,6 +76,21 @@ const Apps = () => {
             className="size-10"
           />
           <h2 className="text-[13px]">Youtube</h2>
+        </div>
+
+        {/* Spotify */}
+        <div
+          onClick={() => toggleApp("Spotify")}
+          className="flex flex-col justify-center items-center cursor-pointer"
+        >
+          <img
+            style={{ userSelect: "none" }}
+            draggable="false"
+            src="spotify.png"
+            alt="Spotify Icon"
+            className="size-10"
+          />
+          <h2 className="text-[13px]">Spotify</h2>
         </div>
       </div>
     </div>
