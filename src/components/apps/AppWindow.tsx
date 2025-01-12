@@ -52,7 +52,11 @@ const AppWindow = ({
           }}
           minimizeApp={() => {
             saveContent?.();
-            dispatch(minimizeApp({ type }));
+            if (type === "TextDocument") {
+              dispatch(minimizeApp({ type, name: title }));
+            } else {
+              dispatch(minimizeApp({ type }));
+            }
           }}
         />
       </div>
