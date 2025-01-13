@@ -1,4 +1,4 @@
-import useDesktopItemLogicHook from "../../hooks/useDesktopItemLogicHook";
+import useDesktopItemLogic from "../../hooks/useDesktopItemLogic";
 
 interface DesktopItemProps {
   name: string;
@@ -19,7 +19,7 @@ const DesktopItem = ({
   order,
 }: DesktopItemProps) => {
   const { handleRename, newName, onClick, setNewName, renamingItem } =
-    useDesktopItemLogicHook({ order, name });
+    useDesktopItemLogic({ order, name });
   return (
     <div
       onContextMenu={(e) => {

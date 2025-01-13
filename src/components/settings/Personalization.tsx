@@ -1,4 +1,4 @@
-import usePersonalizationLogicHook from "../../hooks/usePersonalizationLogicHook";
+import usePersonalizationLogic from "../../hooks/usePersonalizationLogic";
 import { setPersonalization } from "../../redux/slices/settingsSlice";
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -8,7 +8,7 @@ const Personalization = ({
   setIsDragging: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { file, setFile, handleFileUpload, uploading, progress, dispatch } =
-    usePersonalizationLogicHook();
+    usePersonalizationLogic();
   return (
     <div>
       <button

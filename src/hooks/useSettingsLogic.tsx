@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import { setPersonalization } from "../redux/slices/settingsSlice";
-const useSettingsLogicHook = () => {
+const useSettingsLogic = () => {
   const dispatch = useAppDispatch();
 
   const [isDragging, setIsDragging] = useState(true);
@@ -16,4 +16,4 @@ const useSettingsLogicHook = () => {
   return { isDragging, setIsDragging, isPersonalizationOpen, handleClick };
 };
 
-export default useSettingsLogicHook;
+export default useSettingsLogic;

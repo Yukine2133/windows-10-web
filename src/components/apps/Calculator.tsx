@@ -1,5 +1,5 @@
 import { calculatorButtons } from "../../utils/constants";
-import useCalculatorLogicHook from "../../hooks/useCalculatorLogicHook";
+import useCalculatorLogic from "../../hooks/useCalculatorLogic";
 import AppWindow from "./AppWindow";
 
 const Calculator = ({
@@ -7,7 +7,7 @@ const Calculator = ({
 }: {
   constraintRef: React.MutableRefObject<null>;
 }) => {
-  const { history, handleClick, display } = useCalculatorLogicHook();
+  const { history, handleClick, display } = useCalculatorLogic();
 
   return (
     <AppWindow

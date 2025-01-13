@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useCalculatorLogicHook = () => {
+const useCalculatorLogic = () => {
   const [display, setDisplay] = useState("0");
   const [history, setHistory] = useState("");
   const [currentValue, setCurrentValue] = useState<number | null>(null);
@@ -117,4 +117,4 @@ const useCalculatorLogicHook = () => {
   };
 };
 
-export default useCalculatorLogicHook;
+export default useCalculatorLogic;

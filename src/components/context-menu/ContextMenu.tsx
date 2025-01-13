@@ -1,7 +1,7 @@
-import { useContextMenuLogicHook } from "../../hooks/useContextMenuLogicHook";
+import { useContextMenuLogic } from "../../hooks/useContextMenuLogic";
 
 const ContextMenu = () => {
-  const contextMenu = useContextMenuLogicHook();
+  const contextMenu = useContextMenuLogic();
 
   if (!contextMenu) {
     return null;

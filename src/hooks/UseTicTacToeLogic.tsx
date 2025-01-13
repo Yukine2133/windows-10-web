@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 type Player = "X" | "O" | null;
 
-const UseTicTacToeLogicHook = () => {
+const UseTicTacToeLogic = () => {
   const [board, setBoard] = useState<Player[]>(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
   const [winner, setWinner] = useState<Player | "Draw">(null);
@@ -135,4 +135,4 @@ const UseTicTacToeLogicHook = () => {
   };
 };
 
-export default UseTicTacToeLogicHook;
+export default UseTicTacToeLogic;

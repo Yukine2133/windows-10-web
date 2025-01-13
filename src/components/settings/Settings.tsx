@@ -3,7 +3,7 @@ import { settingItems } from "../../utils/constants";
 import Personalization from "./Personalization";
 import AppWindow from "../apps/AppWindow";
 import SettingItem from "./SettingItem";
-import useSettingsLogicHook from "../../hooks/useSettingsLogicHook";
+import useSettingsLogic from "../../hooks/useSettingsLogic";
 
 const Settings = ({
   constraintRef,
@@ -11,7 +11,7 @@ const Settings = ({
   constraintRef: React.MutableRefObject<null>;
 }) => {
   const { isDragging, setIsDragging, isPersonalizationOpen, handleClick } =
-    useSettingsLogicHook();
+    useSettingsLogic();
 
   return (
     <AppWindow

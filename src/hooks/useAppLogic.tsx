@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import { initiatePowerOnSequence } from "../redux/slices/appSlice";
 
-const useAppLogicHook = () => {
+const useAppLogic = () => {
   const dispatch = useAppDispatch();
   const constraintRef = useRef(null);
   const {
@@ -35,4 +35,4 @@ const useAppLogicHook = () => {
   };
 };
 
-export default useAppLogicHook;
+export default useAppLogic;

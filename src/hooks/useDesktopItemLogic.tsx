@@ -6,7 +6,7 @@ import {
 } from "../redux/slices/desktopItemsSlice";
 import { openApp } from "../redux/slices/appSlice";
 
-const useDesktopItemLogicHook = ({
+const useDesktopItemLogic = ({
   order,
   name,
 }: {
@@ -45,4 +45,4 @@ const useDesktopItemLogicHook = ({
   };
 };
 
-export default useDesktopItemLogicHook;
+export default useDesktopItemLogic;

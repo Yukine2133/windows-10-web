@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import { saveTextDocument } from "../redux/slices/textDocumentSlice";
 
-const useTextDocumentLogicHook = ({ name }: { name: string }) => {
+const useTextDocumentLogic = ({ name }: { name: string }) => {
   const dispatch = useAppDispatch();
   const documentContent = useAppSelector(
     (state) => state.textDocument.documents[name]?.content || ""
@@ -27,4 +27,4 @@ const useTextDocumentLogicHook = ({ name }: { name: string }) => {
   };
 };
 
-export default useTextDocumentLogicHook;
+export default useTextDocumentLogic;

@@ -1,6 +1,6 @@
 import React from "react";
 import AppWindow from "./AppWindow";
-import UseTicTacToeLogicHook from "../../hooks/UseTicTacToeLogicHook";
+import UseTicTacToeLogic from "../../hooks/UseTicTacToeLogic";
 
 const TicTacToe = ({
   constraintRef,
@@ -15,7 +15,7 @@ const TicTacToe = ({
     board,
     currentPlayer,
     winner,
-  } = UseTicTacToeLogicHook();
+  } = UseTicTacToeLogic();
   return (
     <AppWindow
       title="Tic Tac Toe"

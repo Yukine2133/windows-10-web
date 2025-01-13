@@ -4,14 +4,14 @@ import { showContextMenu } from "./redux/slices/contextMenuSlice";
 import Taskbar from "./components/taskbar/Taskbar";
 import Apps from "./components/apps/Apps";
 import ContextMenu from "./components/context-menu/ContextMenu";
-import useAppLogicHook from "./hooks/useAppLogicHook";
+import useAppLogic from "./hooks/useAppLogic";
 import ScreenRenderer from "./components/screens/ScreenRenderer";
 import DesktopItemsContainer from "./components/context-menu/DesktopItemsContainer";
 import OpenedApps from "./components/apps/OpenedApps";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { constraintRef, showApp, wallpaper } = useAppLogicHook();
+  const { constraintRef, showApp, wallpaper } = useAppLogic();
 
   return (
     <main

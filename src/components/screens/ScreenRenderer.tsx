@@ -2,7 +2,7 @@ import PowerOnScreen from "./PowerOnScreen";
 import SleepScreen from "./SleepScreen";
 import RestartScreen from "./RestartScreen";
 import ShutDownScreen from "./ShutDownScreen";
-import useAppLogicHook from "../../hooks/useAppLogicHook";
+import useAppLogicHook from "../../hooks/useAppLogic";
 
 const ScreenRenderer = () => {
   const {

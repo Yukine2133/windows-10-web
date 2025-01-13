@@ -1,4 +1,4 @@
-import useTextDocumentLogicHook from "../../hooks/useTextDocumentLogicHook";
+import useTextDocumentLogic from "../../hooks/useTextDocumentLogic";
 import AppWindow from "./AppWindow";
 
 const TextDocument = ({
@@ -9,7 +9,7 @@ const TextDocument = ({
   name: string;
 }) => {
   const { isDragging, setIsDragging, saveContent, setContent, content } =
-    useTextDocumentLogicHook({ name });
+    useTextDocumentLogic({ name });
 
   return (
     <AppWindow

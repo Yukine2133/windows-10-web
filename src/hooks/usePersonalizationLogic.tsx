@@ -4,7 +4,7 @@ import { useAppDispatch } from "./reduxHooks";
 import { storage } from "../firebase/firebase";
 import { setWallpaper } from "../redux/slices/settingsSlice";
 
-const usePersonalizationLogicHook = () => {
+const usePersonalizationLogic = () => {
   const dispatch = useAppDispatch();
 
   const [file, setFile] = useState<File | null>(null);
@@ -57,4 +57,4 @@ const usePersonalizationLogicHook = () => {
   };
 };
 
-export default usePersonalizationLogicHook;
+export default usePersonalizationLogic;

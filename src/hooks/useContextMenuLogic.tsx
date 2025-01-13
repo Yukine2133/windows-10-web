@@ -7,7 +7,7 @@ import {
 } from "../utils/constants";
 import { DesktopItem } from "../redux/slices/desktopItemsSlice";
 
-export const useContextMenuLogicHook = () => {
+export const useContextMenuLogic = () => {
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
 
   const dispatch = useAppDispatch();
