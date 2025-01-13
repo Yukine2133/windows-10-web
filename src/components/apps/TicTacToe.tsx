@@ -65,6 +65,14 @@ const TicTacToe = ({
             </button>
           </div>
         )}
+        {!winner && (
+          <button
+            onClick={resetGame}
+            className="mt-6 px-4 py-2 bg-red-500 text-white rounded"
+          >
+            Reset Game
+          </button>
+        )}
       </div>
     </AppWindow>
   );
