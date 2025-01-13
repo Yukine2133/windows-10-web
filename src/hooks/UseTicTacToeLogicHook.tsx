@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 type Player = "X" | "O" | null;
+
 const UseTicTacToeLogicHook = () => {
   const [board, setBoard] = useState<Player[]>(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
@@ -28,7 +29,6 @@ const UseTicTacToeLogicHook = () => {
     return null;
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getAIMove = (board: Player[]): number | null => {
     if (difficulty === "Easy") {
       // Easy difficulty: Pick a random available move
@@ -96,27 +96,34 @@ const UseTicTacToeLogicHook = () => {
     if (currentPlayer === "O" && !winner) {
       const aiMove = getAIMove(board);
       if (aiMove !== null) {
-        const newBoard = [...board];
-        newBoard[aiMove] = "O";
-        setBoard(newBoard);
+        // Add a delay before the AI makes its move
+        const timeout = setTimeout(() => {
+          const newBoard = [...board];
+          newBoard[aiMove] = "O";
+          setBoard(newBoard);
 
-        const gameWinner = calculateWinner(newBoard);
-        if (gameWinner) {
-          setWinner(gameWinner);
-        } else if (newBoard.every((square) => square)) {
-          setWinner("Draw");
-        } else {
-          setCurrentPlayer("X"); // Switch back to player
-        }
+          const gameWinner = calculateWinner(newBoard);
+          if (gameWinner) {
+            setWinner(gameWinner);
+          } else if (newBoard.every((square) => square)) {
+            setWinner("Draw");
+          } else {
+            setCurrentPlayer("X"); // Switch back to player
+          }
+        }, 1000);
+
+        return () => clearTimeout(timeout); // Cleanup timeout if dependencies change
       }
     }
-  }, [currentPlayer, board, winner, difficulty, getAIMove]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPlayer, board, winner, difficulty]);
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
     setCurrentPlayer("X");
     setWinner(null);
   };
+
   return {
     resetGame,
     handleClick,
