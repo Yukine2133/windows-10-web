@@ -17,15 +17,6 @@ import {
 import { RiBrush4Fill } from "react-icons/ri";
 import { IoMdTime, IoIosSearch } from "react-icons/io";
 import { GrUpdate } from "react-icons/gr";
-import { AnyAction, Dispatch } from "@reduxjs/toolkit";
-import {
-  addFolder,
-  addTextDocument,
-  DesktopItem,
-  removeFolder,
-  removeTextDocument,
-  setRename,
-} from "../redux/slices/desktopItemsSlice";
 
 export const menuItems = [
   { Icon: AiOutlineUser, label: "User" },
@@ -134,50 +125,5 @@ export const settingItems = [
     Icon: GrUpdate,
     label: "Update & Security",
     desc: "Windows Update, recovery backup",
-  },
-];
-
-export const getContextMenuItems = (
-  dispatch: Dispatch<AnyAction>,
-  closeContextMenu: () => void,
-  targetItem: DesktopItem
-) => [
-  {
-    label: "Rename",
-    action: () => {
-      dispatch(setRename(targetItem.name));
-      closeContextMenu();
-    },
-  },
-  {
-    label: "Delete",
-    action: () => {
-      if (targetItem.type === "folder") {
-        dispatch(removeFolder(targetItem.name));
-      } else if (targetItem.type === "textDocument") {
-        dispatch(removeTextDocument(targetItem.name));
-      }
-      closeContextMenu();
-    },
-  },
-];
-
-export const getContextMenuItemsDesktop = (
-  dispatch: Dispatch<AnyAction>,
-  closeContextMenu: () => void
-) => [
-  {
-    label: "Create Folder",
-    action: () => {
-      dispatch(addFolder());
-      closeContextMenu();
-    },
-  },
-  {
-    label: "Create Text Document",
-    action: () => {
-      dispatch(addTextDocument());
-      closeContextMenu();
-    },
   },
 ];
