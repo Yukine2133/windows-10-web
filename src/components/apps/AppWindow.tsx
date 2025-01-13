@@ -3,6 +3,7 @@ import WindowControls from "../WindowControls";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
 import { ChromeTab } from "./Chrome";
+import { PhotosTopBar } from "./Photos";
 
 interface AppWindowProps {
   title: string;
@@ -28,6 +29,17 @@ const AppWindow = ({
   saveContent,
 }: AppWindowProps) => {
   const dispatch = useAppDispatch();
+
+  const renderBar = (type: string) => {
+    switch (type) {
+      case "Chrome":
+        return <ChromeTab />;
+      case "Photos":
+        return <PhotosTopBar name={title} />;
+      default:
+        return <h3 className="py-2 px-4">{title}</h3>;
+    }
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -41,11 +53,8 @@ const AppWindow = ({
       <div
         className={`flex justify-between items-center ${windowControlsClassName}`}
       >
-        {type === "Chrome" ? (
-          <ChromeTab />
-        ) : (
-          <h3 className="py-2 px-4">{title}</h3>
-        )}
+        {renderBar(type)}
+
         <WindowControls
           closeApp={() => {
             dispatch(closeApp({ type }));

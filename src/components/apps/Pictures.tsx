@@ -1,3 +1,4 @@
+import usePicturesLogic from "../../hooks/usePicturesLogic";
 import { pictures } from "../../utils/constants";
 import AppWindow from "./AppWindow";
 
@@ -6,6 +7,7 @@ const Pictures = ({
 }: {
   constraintRef: React.MutableRefObject<null>;
 }) => {
+  const { toggleApp } = usePicturesLogic();
   return (
     <AppWindow
       title="Pictures"
@@ -16,12 +18,15 @@ const Pictures = ({
     >
       <div className="flex items-center gap-6 p-2">
         {pictures.map((picture) => (
-          <div className="cursor-pointer">
+          <div
+            onClick={() => toggleApp({ type: "Photos", name: picture.img })}
+            key={picture.id}
+            className="cursor-pointer hover:bg-[#4d4d4d] p-2 pt-8"
+          >
             <img
-              key={picture.id}
               src={picture.img}
               alt={picture.label}
-              className=" w-32 object-cover hover:bg-[#4d4d4d] p-2 pt-8"
+              className=" w-32 object-cover "
             />
             <h1 className="text-sm text-center">{picture.label}</h1>
           </div>

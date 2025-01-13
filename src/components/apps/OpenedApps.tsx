@@ -8,6 +8,7 @@ import Youtube from "./Youtube";
 import Spotify from "./Spotify";
 import TicTacToe from "./TicTacToe";
 import Pictures from "./Pictures";
+import Photos from "./Photos";
 
 const OpenedApps = ({
   constraintRef,
@@ -48,6 +49,14 @@ const OpenedApps = ({
             return <TicTacToe key={appId} constraintRef={constraintRef} />;
           case "Pictures":
             return <Pictures key={appId} constraintRef={constraintRef} />;
+          case "Photos":
+            return (
+              <Photos
+                name={app.name!}
+                key={appId}
+                constraintRef={constraintRef}
+              />
+            );
           default:
             return null;
         }
