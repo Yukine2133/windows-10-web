@@ -6,6 +6,7 @@ import Chrome from "./Chrome";
 import Solitaire from "./Solitaire";
 import Youtube from "./Youtube";
 import Spotify from "./Spotify";
+import TicTacToe from "./TicTacToe";
 
 const OpenedApps = ({
   constraintRef,
@@ -42,6 +43,8 @@ const OpenedApps = ({
             return <Youtube key={appId} constraintRef={constraintRef} />;
           case "Spotify":
             return <Spotify key={appId} constraintRef={constraintRef} />;
+          case "TicTacToe":
+            return <TicTacToe key={appId} constraintRef={constraintRef} />;
           default:
             return null;
         }

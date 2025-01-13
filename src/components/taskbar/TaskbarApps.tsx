@@ -98,6 +98,17 @@ const TaskbarApps = () => {
                 alt="Spotify"
               />
             );
+          case "TicTacToe":
+            return (
+              <TaskbarApp
+                key={appId}
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="tictactoe.png"
+                alt="Tic Tac Toe"
+              />
+            );
           default:
             return null;
         }

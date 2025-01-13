@@ -92,6 +92,21 @@ const Apps = () => {
           />
           <h2 className="text-[13px]">Spotify</h2>
         </div>
+
+        {/* Tic Tac Toe */}
+        <div
+          onClick={() => toggleApp("TicTacToe")}
+          className="flex flex-col justify-center items-center cursor-pointer"
+        >
+          <img
+            style={{ userSelect: "none" }}
+            draggable="false"
+            src="tictactoe.png"
+            alt="TicTacToe Icon"
+            className="size-10"
+          />
+          <h2 className="text-[13px] text-center">Tic Tac Toe</h2>
+        </div>
       </div>
     </div>
   );
