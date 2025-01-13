@@ -7,6 +7,7 @@ import Solitaire from "./Solitaire";
 import Youtube from "./Youtube";
 import Spotify from "./Spotify";
 import TicTacToe from "./TicTacToe";
+import Pictures from "./Pictures";
 
 const OpenedApps = ({
   constraintRef,
@@ -45,6 +46,8 @@ const OpenedApps = ({
             return <Spotify key={appId} constraintRef={constraintRef} />;
           case "TicTacToe":
             return <TicTacToe key={appId} constraintRef={constraintRef} />;
+          case "Pictures":
+            return <Pictures key={appId} constraintRef={constraintRef} />;
           default:
             return null;
         }

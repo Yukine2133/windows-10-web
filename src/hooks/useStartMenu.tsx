@@ -8,15 +8,20 @@ const useStartMenu = () => {
   const { minimizedApps } = useAppSelector((state) => state.app);
 
   const handleClick = (label: string) => {
-    if (label === "Power") {
-      setQuit(!quit);
-    }
-    if (label === "Settings") {
-      toggleSettings("Settings");
+    switch (label) {
+      case "Power":
+        setQuit(!quit);
+        break;
+      case "Settings":
+        toggleApp("Settings");
+        break;
+      case "Pictures":
+        toggleApp("Pictures");
+        break;
     }
   };
 
-  const toggleSettings = (name: string) => {
+  const toggleApp = (name: string) => {
     setIsStartMenuOpen(false);
     if (minimizedApps.includes(name)) {
       dispatch(restoreApp(name));

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import {
   getContextMenuItems,
   getContextMenuItemsDesktop,
-} from "../utils/constants";
+} from "../utils/contextMenuUtils";
 import { DesktopItem } from "../redux/slices/desktopItemsSlice";
 
 export const useContextMenuLogic = () => {

@@ -127,3 +127,16 @@ export const settingItems = [
     desc: "Windows Update, recovery backup",
   },
 ];
+
+export const pictures = [
+  {
+    id: 1,
+    img: "mita.jpg",
+    label: "Mita.jpg",
+  },
+  {
+    id: 2,
+    img: "monkey.jfif",
+    label: "Monkey.jfif",
+  },
+];
