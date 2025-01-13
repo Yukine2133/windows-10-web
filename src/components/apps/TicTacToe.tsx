@@ -54,7 +54,7 @@ const TicTacToe = ({
             ) : (
               <div>
                 <h2 className="text-xl font-bold">Player {winner} wins!</h2>
-                {winner === "O" && <p>Image losing to an AI...</p>}
+                {winner === "O" && <p>Imagine losing to an AI...</p>}
               </div>
             )}
             <button
