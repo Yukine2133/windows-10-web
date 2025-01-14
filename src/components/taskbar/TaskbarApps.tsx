@@ -109,6 +109,28 @@ const TaskbarApps = () => {
                 alt="Tic Tac Toe"
               />
             );
+          case "Pictures":
+            return (
+              <TaskbarApp
+                key={appId}
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="picture-folder.png"
+                alt="Picture Folder"
+              />
+            );
+          case "Photos":
+            return (
+              <TaskbarApp
+                key={appId}
+                isMinimized={isMinimized}
+                toggleApp={toggleApp}
+                app={app}
+                src="photos.png"
+                alt="Photos"
+              />
+            );
           default:
             return null;
         }
