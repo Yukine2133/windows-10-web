@@ -147,11 +147,16 @@ export const pictures = [
     img: "meme2.jpg",
   },
   {
-    id: 4,
+    id: 5,
     img: "nerd.jpg",
   },
   {
-    id: 4,
+    id: 6,
     img: "me.webp",
+  },
+
+  {
+    id: 7,
+    img: "von.gif",
   },
 ];

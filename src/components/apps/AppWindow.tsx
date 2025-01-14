@@ -57,11 +57,16 @@ const AppWindow = ({
 
         <WindowControls
           closeApp={() => {
-            dispatch(closeApp({ type }));
+            dispatch(closeApp({ type, name: title }));
+            if (type === "TextDocument" || type === "Photos") {
+              dispatch(closeApp({ type, name: title }));
+            } else {
+              dispatch(closeApp({ type }));
+            }
           }}
           minimizeApp={() => {
             saveContent?.();
-            if (type === "TextDocument") {
+            if (type === "TextDocument" || type === "Photos") {
               dispatch(minimizeApp({ type, name: title }));
             } else {
               dispatch(minimizeApp({ type }));
