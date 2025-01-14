@@ -13,6 +13,7 @@ interface AppState {
   showApp: boolean;
   openedApps: OpenedApp[];
   minimizedApps: string[];
+  activeApp: string | null;
 }
 
 const initialState: AppState = {
@@ -23,7 +24,9 @@ const initialState: AppState = {
   showApp: false,
   openedApps: [],
   minimizedApps: [],
+  activeApp: null, // Initially, no active app
 };
+
 const appSlice = createSlice({
   name: "app",
   initialState,
@@ -61,15 +64,23 @@ const appSlice = createSlice({
       }
     },
 
+    setActiveApp: (state, action: PayloadAction<string>) => {
+      state.activeApp = action.payload; // Set the active app by app ID
+    },
+
     closeApp: (
       state,
       action: PayloadAction<{ type: string; name?: string }>
     ) => {
+      const appId = `${action.payload.type}-${action.payload.name}`;
       state.openedApps = state.openedApps.filter(
         (app) =>
           app.type !== action.payload.type ||
           (action.payload.name && app.name !== action.payload.name)
       );
+      if (state.activeApp === appId) {
+        state.activeApp = null;
+      }
     },
 
     minimizeApp: (
@@ -101,5 +112,6 @@ export const {
   closeApp,
   minimizeApp,
   restoreApp,
+  setActiveApp,
 } = appSlice.actions;
 export default appSlice.reducer;

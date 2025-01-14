@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
 import WindowControls from "../WindowControls";
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { closeApp, minimizeApp } from "../../redux/slices/appSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import {
+  closeApp,
+  minimizeApp,
+  setActiveApp,
+} from "../../redux/slices/appSlice";
 import { ChromeTab } from "./Chrome";
 import { PhotosTopBar } from "./Photos";
 
@@ -29,6 +33,15 @@ const AppWindow = ({
   saveContent,
 }: AppWindowProps) => {
   const dispatch = useAppDispatch();
+  const { activeApp } = useAppSelector((state) => state.app);
+
+  const appId = `${type}-${title}`;
+
+  const isActive = activeApp === appId;
+
+  const handleFocus = () => {
+    dispatch(setActiveApp(appId)); // Set this app as the active app
+  };
 
   const renderBar = (type: string) => {
     switch (type) {
@@ -48,7 +61,10 @@ const AppWindow = ({
       drag={drag && isDragging}
       dragConstraints={constraintRef}
       dragMomentum={false}
-      className={`absolute shadow-2xl z-10 bg-[#202020] text-white ${className}`}
+      onClick={handleFocus}
+      className={`absolute shadow-2xl ${
+        isActive ? "z-50" : "z-10"
+      } bg-[#202020] text-white ${className}`}
     >
       <div
         className={`flex justify-between items-center ${windowControlsClassName}`}
