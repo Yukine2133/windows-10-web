@@ -132,11 +132,26 @@ export const pictures = [
   {
     id: 1,
     img: "mita.jpg",
-    label: "Mita.jpg",
   },
   {
     id: 2,
     img: "monkey.jfif",
-    label: "Monkey.jfif",
+  },
+
+  {
+    id: 3,
+    img: "meme.png",
+  },
+  {
+    id: 4,
+    img: "meme2.jpg",
+  },
+  {
+    id: 4,
+    img: "nerd.jpg",
+  },
+  {
+    id: 4,
+    img: "me.webp",
   },
 ];
