@@ -48,7 +48,7 @@ const AppWindow = ({
       drag={drag && isDragging}
       dragConstraints={constraintRef}
       dragMomentum={false}
-      className={`absolute z-10 bg-[#202020] text-white ${className}`}
+      className={`absolute shadow-2xl z-10 bg-[#202020] text-white ${className}`}
     >
       <div
         className={`flex justify-between items-center ${windowControlsClassName}`}

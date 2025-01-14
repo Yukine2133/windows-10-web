@@ -19,7 +19,7 @@ const TextDocument = ({
       drag={isDragging}
       isDragging={isDragging}
       constraintRef={constraintRef}
-      className="shadow-2xl w-[60rem] h-[20rem]  left-[calc(50%-30rem)] top-[21%]"
+      className=" w-[60rem] h-[20rem]  left-[calc(50%-30rem)] top-[21%]"
       windowControlsClassName="border-b border-gray-700"
     >
       <div>
