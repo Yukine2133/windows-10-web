@@ -1,14 +1,6 @@
 import { motion } from "framer-motion";
 import WindowControls from "../WindowControls";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import {
-  closeApp,
-  minimizeApp,
-  setActiveApp,
-} from "../../redux/slices/appSlice";
-import { ChromeTab } from "./Chrome";
-import { PhotosTopBar } from "./Photos";
-import { setPersonalization } from "../../redux/slices/settingsSlice";
+import useAppWindowLogic from "../../hooks/useAppWindowLogic";
 
 interface AppWindowProps {
   title: string;
@@ -33,28 +25,8 @@ const AppWindow = ({
   windowControlsClassName = "",
   saveContent,
 }: AppWindowProps) => {
-  const dispatch = useAppDispatch();
-  const { activeApp } = useAppSelector((state) => state.app);
-  const { isPersonalizationOpen } = useAppSelector((state) => state.settings);
-
-  const appId = `${type}-${title}`;
-
-  const isActive = activeApp === appId;
-
-  const handleFocus = () => {
-    dispatch(setActiveApp(appId));
-  };
-
-  const renderBar = (type: string) => {
-    switch (type) {
-      case "Chrome":
-        return <ChromeTab />;
-      case "Photos":
-        return <PhotosTopBar name={title} />;
-      default:
-        return <h3 className="py-2 px-4">{title}</h3>;
-    }
-  };
+  const { renderBar, handleFocus, isActive, onCloseApp, onMinimizeApp } =
+    useAppWindowLogic({ type, title });
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -74,25 +46,10 @@ const AppWindow = ({
         {renderBar(type)}
 
         <WindowControls
-          closeApp={() => {
-            dispatch(closeApp({ type, name: title }));
-            if (type === "TextDocument" || type === "Photos") {
-              dispatch(closeApp({ type, name: title }));
-            } else {
-              dispatch(closeApp({ type }));
-            }
-
-            if (isPersonalizationOpen) {
-              dispatch(setPersonalization(false));
-            }
-          }}
+          closeApp={onCloseApp}
           minimizeApp={() => {
             saveContent?.();
-            if (type === "TextDocument" || type === "Photos") {
-              dispatch(minimizeApp({ type, name: title }));
-            } else {
-              dispatch(minimizeApp({ type }));
-            }
+            onMinimizeApp();
           }}
         />
       </div>
