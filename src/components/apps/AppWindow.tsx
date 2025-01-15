@@ -8,6 +8,7 @@ import {
 } from "../../redux/slices/appSlice";
 import { ChromeTab } from "./Chrome";
 import { PhotosTopBar } from "./Photos";
+import { setPersonalization } from "../../redux/slices/settingsSlice";
 
 interface AppWindowProps {
   title: string;
@@ -34,13 +35,14 @@ const AppWindow = ({
 }: AppWindowProps) => {
   const dispatch = useAppDispatch();
   const { activeApp } = useAppSelector((state) => state.app);
+  const { isPersonalizationOpen } = useAppSelector((state) => state.settings);
 
   const appId = `${type}-${title}`;
 
   const isActive = activeApp === appId;
 
   const handleFocus = () => {
-    dispatch(setActiveApp(appId)); // Set this app as the active app
+    dispatch(setActiveApp(appId));
   };
 
   const renderBar = (type: string) => {
@@ -78,6 +80,10 @@ const AppWindow = ({
               dispatch(closeApp({ type, name: title }));
             } else {
               dispatch(closeApp({ type }));
+            }
+
+            if (isPersonalizationOpen) {
+              dispatch(setPersonalization(false));
             }
           }}
           minimizeApp={() => {
