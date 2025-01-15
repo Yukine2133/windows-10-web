@@ -8,6 +8,7 @@ const useStartMenu = () => {
   const { minimizedApps } = useAppSelector((state) => state.app);
 
   const startMenuRef = useRef<HTMLDivElement | null>(null);
+  const startButtonRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = (label: string) => {
     switch (label) {
@@ -50,7 +51,9 @@ const useStartMenu = () => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
         startMenuRef.current &&
-        !startMenuRef.current.contains(e.target as Node)
+        !startMenuRef.current.contains(e.target as Node) &&
+        startButtonRef.current &&
+        !startButtonRef.current.contains(e.target as Node)
       ) {
         setIsStartMenuOpen(false);
       }
@@ -61,7 +64,7 @@ const useStartMenu = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dispatch]);
+  }, []);
 
   return {
     labelVariants,
@@ -73,6 +76,7 @@ const useStartMenu = () => {
     quit,
     setQuit,
     startMenuRef,
+    startButtonRef,
   };
 };
 

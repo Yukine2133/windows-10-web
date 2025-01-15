@@ -15,11 +15,13 @@ const StartMenu = () => {
     handleClick,
     quit,
     startMenuRef,
+    startButtonRef,
   } = useStartMenu();
 
   return (
     <div className="relative">
       <div
+        ref={startButtonRef}
         onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
         className="hover:bg-[#272727]  transition-colors duration-100 h-full w-10 p-2"
       >
@@ -67,13 +69,11 @@ const StartMenu = () => {
           </div>
 
           <div className="flex-1 w-full">
-            <div className="text-sm">
-              <Apps
-                setIsStartMenuOpen={setIsStartMenuOpen}
-                startMenu={true}
-                className="grid grid-cols-4 gap-4"
-              />
-            </div>
+            <Apps
+              setIsStartMenuOpen={setIsStartMenuOpen}
+              startMenu={true}
+              className="grid grid-cols-4 gap-4 text-sm"
+            />
           </div>
         </motion.div>
       )}
