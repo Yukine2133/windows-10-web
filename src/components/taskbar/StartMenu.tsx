@@ -13,7 +13,9 @@ const StartMenu = () => {
     menuVariants,
     handleClick,
     quit,
+    startMenuRef,
   } = useStartMenu();
+
   return (
     <div className="relative">
       <div
@@ -24,6 +26,7 @@ const StartMenu = () => {
       </div>
       {isStartMenuOpen && (
         <motion.div
+          ref={startMenuRef}
           initial="hidden"
           animate="visible"
           exit="exit"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { openApp, restoreApp } from "../redux/slices/appSlice";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 
@@ -6,6 +6,8 @@ const useStartMenu = () => {
   const dispatch = useAppDispatch();
 
   const { minimizedApps } = useAppSelector((state) => state.app);
+
+  const startMenuRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = (label: string) => {
     switch (label) {
@@ -44,6 +46,23 @@ const useStartMenu = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        startMenuRef.current &&
+        !startMenuRef.current.contains(e.target as Node)
+      ) {
+        setIsStartMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dispatch]);
+
   return {
     labelVariants,
     isStartMenuOpen,
@@ -53,6 +72,7 @@ const useStartMenu = () => {
     minimizedApps,
     quit,
     setQuit,
+    startMenuRef,
   };
 };
 
