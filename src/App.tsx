@@ -37,7 +37,7 @@ const App = () => {
             style={{ userSelect: "none" }}
           />
           <div className="flex">
-            <Apps />
+            <Apps className="flex flex-col  items-center pt-2 px-1 gap-2" />
             <DesktopItemsContainer />
           </div>
           <OpenedApps constraintRef={constraintRef} />

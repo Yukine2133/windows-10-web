@@ -33,7 +33,7 @@ const Photos = ({
       type="Photos"
       drag={isDragging}
       constraintRef={constraintRef}
-      className="top-[1rem] left-[calc(48%-30rem)]  w-[65rem] h-[520px]"
+      className="top-[1rem] z-[60] left-[calc(48%-30rem)]  w-[65rem] h-[520px]"
       windowControlsClassName="border-b border-gray-700"
     >
       <div className="flex justify-center h-[440px]  items-center">

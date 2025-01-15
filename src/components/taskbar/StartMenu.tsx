@@ -4,6 +4,7 @@ import { menuItems } from "../../utils/constants";
 import { motion } from "framer-motion";
 import Quit from "./Quit";
 import useStartMenu from "../../hooks/useStartMenu";
+import Apps from "../apps/Apps";
 
 const StartMenu = () => {
   const {
@@ -66,7 +67,13 @@ const StartMenu = () => {
           </div>
 
           <div className="flex-1 w-full">
-            <div className="text-sm">Apps</div>
+            <div className="text-sm">
+              <Apps
+                setIsStartMenuOpen={setIsStartMenuOpen}
+                startMenu={true}
+                className="grid grid-cols-4 gap-4"
+              />
+            </div>
           </div>
         </motion.div>
       )}
