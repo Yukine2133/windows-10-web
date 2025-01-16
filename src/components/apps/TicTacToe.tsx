@@ -1,6 +1,7 @@
 import React from "react";
 import AppWindow from "./AppWindow";
 import UseTicTacToeLogic from "../../hooks/UseTicTacToeLogic";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 const TicTacToe = ({
   constraintRef,
@@ -16,6 +17,8 @@ const TicTacToe = ({
     currentPlayer,
     winner,
   } = UseTicTacToeLogic();
+
+  const { colorScheme } = useAppSelector((state) => state.settings);
   return (
     <AppWindow
       title="Tic Tac Toe"
@@ -39,7 +42,16 @@ const TicTacToe = ({
           {board.map((value, index) => (
             <button
               key={index}
-              className="w-16 h-16 bg-blue-500 text-white text-2xl font-bold flex items-center justify-center"
+              style={{
+                backgroundColor: colorScheme,
+              }}
+              className={`
+                size-16   ${
+                  colorScheme === "#fff" ? "text-black" : "text-white"
+                } text-2xl font-bold flex items-center justify-center
+                
+                
+                `}
               onClick={() => handleClick(index)}
               disabled={!!value || winner !== null || currentPlayer === "O"} // Disable squares when AI is playing
             >
