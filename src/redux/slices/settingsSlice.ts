@@ -9,7 +9,7 @@ interface AppState {
 const initialState: AppState = {
   isPersonalizationOpen: false,
   wallpaper: localStorage.getItem("wallpaper") || "default-wallpaper.webp",
-  colorScheme: "#731380",
+  colorScheme: localStorage.getItem("colorScheme") || "#731380",
 };
 
 const settingsSlice = createSlice({
@@ -25,6 +25,7 @@ const settingsSlice = createSlice({
     },
     setColorScheme: (state, action: PayloadAction<string>) => {
       state.colorScheme = action.payload;
+      localStorage.setItem("colorScheme", action.payload);
     },
   },
 });

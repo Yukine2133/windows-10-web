@@ -7,7 +7,7 @@ const ColorScheme = () => {
 
   return (
     <div className="flex flex-col ">
-      <h2 className="text-xl font-semibold">Change Color Scheme</h2>
+      <h2 className="text-xl font-semibold text-center">Change Color Scheme</h2>
       <div className="grid grid-cols-7 gap-4 mt-4">
         {colors.map((colorItem) => (
           <div

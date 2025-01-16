@@ -11,7 +11,10 @@ const Wallpaper = ({
   return (
     <div className="mx-auto">
       <div className="flex items-center justify-center flex-col p-3 space-y-4">
-        <label htmlFor="file-upload" className="text-xl cursor-pointer">
+        <label
+          htmlFor="file-upload"
+          className="text-xl font-semibold cursor-pointer"
+        >
           Change wallpaper
         </label>
         <input
