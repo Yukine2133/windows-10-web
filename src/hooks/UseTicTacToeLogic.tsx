@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useAppSelector } from "./reduxHooks";
 type Player = "X" | "O" | null;
 
 const UseTicTacToeLogic = () => {
+  const { colorScheme } = useAppSelector((state) => state.settings);
+
   const [board, setBoard] = useState<Player[]>(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
   const [winner, setWinner] = useState<Player | "Draw">(null);
@@ -132,6 +135,7 @@ const UseTicTacToeLogic = () => {
     board,
     currentPlayer,
     winner,
+    colorScheme,
   };
 };
 

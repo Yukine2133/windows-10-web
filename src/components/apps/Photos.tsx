@@ -18,6 +18,7 @@ import { TbWorldSearch } from "react-icons/tb";
 import { MdOutlineZoomOutMap } from "react-icons/md";
 import { useState } from "react";
 import { LuMoveDiagonal } from "react-icons/lu";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 const Photos = ({
   constraintRef,
@@ -47,10 +48,14 @@ const Photos = ({
 export default Photos;
 
 export const PhotosTopBar = ({ name }: { name: string }) => {
+  const { colorScheme } = useAppSelector((state) => state.settings);
   return (
     <div className="px-2 flex items-center justify-center ">
       <div className="flex items-center ">
-        <div className="flex bg-[#f783b2] p-2 rounded-lg text-black items-center gap-1 mr-2 cursor-pointer">
+        <div
+          style={{ backgroundColor: colorScheme }}
+          className="flex  p-2 rounded-lg text-black items-center gap-1 mr-2 cursor-pointer"
+        >
           <BiEdit className="size-6" />
           <h2 className="text-xs">Edit</h2>
         </div>

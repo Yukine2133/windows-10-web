@@ -1,7 +1,6 @@
 import React from "react";
 import AppWindow from "./AppWindow";
 import UseTicTacToeLogic from "../../hooks/UseTicTacToeLogic";
-import { useAppSelector } from "../../hooks/reduxHooks";
 
 const TicTacToe = ({
   constraintRef,
@@ -16,9 +15,9 @@ const TicTacToe = ({
     board,
     currentPlayer,
     winner,
+    colorScheme,
   } = UseTicTacToeLogic();
 
-  const { colorScheme } = useAppSelector((state) => state.settings);
   return (
     <AppWindow
       title="Tic Tac Toe"
