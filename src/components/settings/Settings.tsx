@@ -20,7 +20,7 @@ const Settings = ({
       isDragging={isDragging}
       type="Settings"
       constraintRef={constraintRef}
-      className=" bg-black z-10  top-[3.125rem] left-[calc(42%-30rem)]  w-[75rem] overflow-y-auto h-[80%] scrollbar-hidden"
+      className=" bg-black   top-[3.125rem] left-[calc(42%-30rem)]  w-[75rem] overflow-y-auto h-[80%] scrollbar-hidden"
     >
       {isPersonalizationOpen ? (
         <Personalization setIsDragging={setIsDragging} />
