@@ -1,36 +1,23 @@
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { setColorScheme } from "../../../redux/slices/settingsSlice";
+import { colors } from "../../../utils/constants";
 
 const ColorScheme = () => {
   const dispatch = useAppDispatch();
-  const colors = [
-    {
-      id: 1,
-      name: "Purple",
-      hex: "#731380",
-    },
-    {
-      id: 2,
-      name: "Blue",
-      hex: "#0d6efd",
-    },
-    {
-      id: 3,
-      name: "Light Blue",
-      hex: "#0dcaf0",
-    },
-  ];
+
   return (
-    <div className="flex gap-4">
-      {colors.map((colorItem) => (
-        <div key={colorItem.id}>
+    <div className="flex flex-col ">
+      <h2 className="text-xl font-semibold">Change Color Scheme</h2>
+      <div className="grid grid-cols-7 gap-4 mt-4">
+        {colors.map((colorItem) => (
           <div
+            key={colorItem.id}
             onClick={() => dispatch(setColorScheme(colorItem.hex))}
             className="w-8 h-8 rounded-sm cursor-pointer"
             style={{ backgroundColor: colorItem.hex }}
           ></div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

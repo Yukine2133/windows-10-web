@@ -160,3 +160,111 @@ export const pictures = [
     img: "von.gif",
   },
 ];
+
+export const colors = [
+  {
+    id: 1,
+    name: "Purple",
+    hex: "#731380",
+  },
+  {
+    id: 2,
+    name: "Blue",
+    hex: "#0d6efd",
+  },
+  {
+    id: 3,
+    name: "Light Blue",
+    hex: "#0dcaf0",
+  },
+  {
+    id: 4,
+    name: "Red",
+    hex: "#dc3545",
+  },
+  {
+    id: 5,
+    name: "Orange",
+    hex: "#fd7e14",
+  },
+  {
+    id: 6,
+    name: "Yellow",
+    hex: "#ffc107",
+  },
+  {
+    id: 7,
+    name: "Green",
+    hex: "#28a745",
+  },
+  {
+    id: 8,
+    name: "Teal",
+    hex: "#20c997",
+  },
+  {
+    id: 9,
+    name: "Pink",
+    hex: "#e83e8c",
+  },
+  {
+    id: 10,
+    name: "Brown",
+    hex: "#795548",
+  },
+  {
+    id: 11,
+    name: "Dark Gray",
+    hex: "#343a40",
+  },
+  {
+    id: 12,
+    name: "Light Gray",
+    hex: "#adb5bd",
+  },
+  {
+    id: 13,
+    name: "Cyan",
+    hex: "#17a2b8",
+  },
+  {
+    id: 14,
+    name: "Magenta",
+    hex: "#d63384",
+  },
+  {
+    id: 15,
+    name: "Lime",
+    hex: "#c7ea46",
+  },
+  {
+    id: 16,
+    name: "Amber",
+    hex: "#ffbf00",
+  },
+  {
+    id: 17,
+    name: "Violet",
+    hex: "#8a2be2",
+  },
+  {
+    id: 18,
+    name: "Gold",
+    hex: "#ffc300",
+  },
+  {
+    id: 19,
+    name: "Silver",
+    hex: "#c0c0c0",
+  },
+  {
+    id: 20,
+    name: "Midnight Blue",
+    hex: "#2c3e50",
+  },
+  {
+    id: 21,
+    name: "White",
+    hex: "#fff",
+  },
+];

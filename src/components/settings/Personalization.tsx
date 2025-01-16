@@ -33,7 +33,7 @@ const Personalization = ({
       <div className=" bg-[#1f1f1f] w-[200px] h-full">
         <button
           onClick={() => dispatch(setPersonalization(false))}
-          className="px-4 flex items-center gap-2 "
+          className="px-2 py-2 flex items-center gap-2 "
         >
           <BsArrowLeft className="text-lg" />
           <h6
