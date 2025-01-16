@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { openApp, restoreApp } from "../../redux/slices/appSlice";
+import { openApp, restoreApp, setActiveApp } from "../../redux/slices/appSlice";
 import AppItem from "./AppItem";
 
 const Apps = ({
@@ -15,6 +15,7 @@ const Apps = ({
   const { minimizedApps } = useAppSelector((state) => state.app);
 
   const toggleApp = (name: string) => {
+    dispatch(setActiveApp(name));
     if (setIsStartMenuOpen) {
       setIsStartMenuOpen(false);
     }
