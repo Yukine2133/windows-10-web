@@ -19,7 +19,9 @@ const useAppWindowLogic = ({
   const isActive = activeApp === appId;
 
   const handleFocus = () => {
-    dispatch(setActiveApp(appId));
+    if (!isActive) {
+      dispatch(setActiveApp(appId));
+    }
   };
 
   const onCloseApp = () => {
