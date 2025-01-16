@@ -1,48 +1,52 @@
-import usePersonalizationLogic from "../../hooks/usePersonalizationLogic";
-import { setPersonalization } from "../../redux/slices/settingsSlice";
-import { BsArrowLeft } from "react-icons/bs";
+import { AiOutlinePicture } from "react-icons/ai";
+import Wallpaper from "./personalization/Wallpaper";
+import { useState } from "react";
+import { MdOutlineColorLens } from "react-icons/md";
+import ColorScheme from "./personalization/ColorScheme";
 
 const Personalization = ({
   setIsDragging,
 }: {
   setIsDragging: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { file, setFile, handleFileUpload, uploading, progress, dispatch } =
-    usePersonalizationLogic();
+  const [tab, setTab] = useState("Wallpaper");
+
+  const items = [
+    {
+      id: 1,
+      name: "Wallpaper",
+      icon: AiOutlinePicture,
+    },
+    {
+      id: 2,
+      name: "Color Scheme",
+      icon: MdOutlineColorLens,
+    },
+  ];
   return (
-    <div>
-      <button
-        onClick={() => dispatch(setPersonalization(false))}
-        className="px-4 flex items-center gap-2 "
-      >
-        <BsArrowLeft className="text-lg" />
-        <h6
-          className="
-      text-sm"
-        >
-          Go back
-        </h6>
-      </button>
-      <div className="flex items-center justify-center flex-col p-3 space-y-4">
-        <label htmlFor="file-upload" className="text-xl cursor-pointer">
-          Change wallpaper
-        </label>
-        <input
-          type="file"
-          id="file-upload"
-          accept="image/*"
-          onChange={(e) => setFile(e.target.files?.[0] || null)}
-          onMouseEnter={() => setIsDragging(false)}
-          onMouseLeave={() => setIsDragging(true)}
-          className="outline-none bg-transparent bg-stone-900 w-1/2 rounded-sm hidden"
-        />
-        <button
-          onClick={handleFileUpload}
-          disabled={uploading || !file}
-          className="bg-blue-600 px-4 py-2 rounded-sm text-white disabled:bg-gray-500"
-        >
-          {uploading ? `Uploading... ${progress}%` : "Upload Wallpaper"}
-        </button>
+    <div className="flex h-full">
+      <div className=" bg-[#1f1f1f] w-[200px] h-full">
+        {items.map((item) => (
+          <div
+            key={item.id}
+            onClick={() => setTab(item.name)}
+            className={`
+              flex items-center gap-2   hover:bg-[#353535] ${
+                tab === item.name && "border-l-4  border-[#731380] "
+              } transition-colors duration-200 p-2
+              `}
+          >
+            <item.icon className="size-5" />
+            <h2>{item.name}</h2>
+          </div>
+        ))}
+      </div>
+      <div className="mx-auto ">
+        {tab === "Wallpaper" ? (
+          <Wallpaper setIsDragging={setIsDragging} />
+        ) : (
+          <ColorScheme />
+        )}
       </div>
     </div>
   );
