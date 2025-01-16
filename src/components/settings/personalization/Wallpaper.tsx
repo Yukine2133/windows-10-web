@@ -10,18 +10,6 @@ const Wallpaper = ({
     usePersonalizationLogic();
   return (
     <div className="mx-auto">
-      {/* <button
-        onClick={() => dispatch(setPersonalization(false))}
-        className="px-4 flex items-center gap-2 "
-      >
-        <BsArrowLeft className="text-lg" />
-        <h6
-          className="
-      text-sm"
-        >
-          Go back
-        </h6>
-      </button> */}
       <div className="flex items-center justify-center flex-col p-3 space-y-4">
         <label htmlFor="file-upload" className="text-xl cursor-pointer">
           Change wallpaper
