@@ -57,7 +57,7 @@ const Youtube = ({
       </div>
 
       <iframe
-        src="https://www.youtube.com/embed/gsLvizl5j4E?autoplay=1"
+        src="https://www.youtube.com/embed/jSBqyatbmPc?si=FikDUh-IF-Xg6Of2"
         title="YouTube video player"
         allow="autoplay; encrypted-media; accelerometer; clipboard-write; gyroscope; picture-in-picture; web-share"
         width="100%"
