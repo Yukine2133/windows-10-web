@@ -1,50 +1,75 @@
-# React + TypeScript + Vite
+# Windows 10 Web Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Windows 10 Web Clone** is a browser-based recreation of the Windows 10 experience, built with modern web technologies. This project replicates key Windows 10 functionalities, including a dynamic taskbar, system apps, and customizable settings, all running in a web environment.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Fully Functional Taskbar**: Displays open applications and updates the date & time in real-time.
+- **Window Management**: Open, minimize, and close apps just like in Windows 10.
+- **Pre-installed Apps**:
+  - **Calculator**: Perform basic arithmetic operations such as addition, subtraction, multiplication, and division, with full keyboard support.
+  - **Tic-Tac-Toe**: Play the classic game within the web environment.
+  - **Chrome, Solitaire, Spotify, YouTube**: Embedded via iframes for seamless integration.
+  - **Text Editor**: Create and edit text documents, with automatic saving in local storage.
+- **Settings Panel**:
+  - Change wallpaper (saved in Firebase for persistence).
+  - Customize the color scheme to personalize the UI.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Vite**
+- **React**
+- **TypeScript**
+- **Redux Toolkit**
+- **Firebase**
+- **Framer Motion**
+- **Tailwind CSS**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/Yukine2133/windows-10-web.git
+   cd windows-10-web
+   ```
+
+2. **Create an environment file**
+
+   In the root of the project, create a `.env` file and add your Firebase configuration:
+
+   ```bash
+
+    VITE_API_KEY=
+    VITE_AUTH_DOMAIN=
+    VITE_PROJECT_ID=
+    VITE_STORAGE_BUCKET=
+    VITE_MESSAGING_SENDER_ID=
+    VITE_APP_ID=
+   ```
+
+   > **Note:** Firebase is used to store wallpaper.
+
+3. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+4. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **View the app**
+
+   Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
